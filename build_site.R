@@ -7,3 +7,4 @@ setwd("C:/R_Projects/LearnR")
 #render your sweet site. 
 rmarkdown::render_site()
 
+

@@ -103,18 +103,20 @@ v1/v2
 
 ### Lists
 
-## Create a list and explore its features
+Create a list and explore its features.
 
 * Select certain objects from the list
 
 ### Data Frames
 
-## Create a data frame and explore its features
+Create a data frame and explore its features
 
 * Check data frame dimensions
 * Check column names
 
 ### Factors
+
+Understand what a factor is, and when to use it or not use it.
 
 ## R Data Sets
 R and R packages have built-in data sets for practicing and developing your R code. We will explore the `iris` dataset and see some examples of data manipulation.
