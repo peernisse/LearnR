@@ -11,7 +11,7 @@
 
 
 
-<title>LearnR</title>
+<title>Welcome to Learn R! Lessons</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,7 +19,11 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -262,7 +266,110 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
 
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -298,19 +405,85 @@ $(document).ready(function () {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
 
 
-<h1 class="title toc-ignore">LearnR</h1>
+
+<h1 class="title toc-ignore">Welcome to Learn R! Lessons</h1>
 
 </div>
 
 
-<p>This webpage is home to the Learn R! class.</p>
-<p>R is the gold standard for statistical computing in the science world.</p>
-<p>Use the navigation bar at the top to find out more information and view lessons.</p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>This class will consist of 6-8 two-hour session held Friday mornings at 7. We will hold it in a conference room in SLC office, and by Skype.</p>
+<div id="prerequesites" class="section level2">
+<h2>Prerequesites</h2>
+<p>You need only a desire to improve your data handling and analysis skills and a few installs of software on your computer!</p>
+<div id="installs" class="section level3">
+<h3>Installs</h3>
+<p>The following steps will set you up for the class. You will need to download the <code>.exe</code> files somewhere on your hard drive, then call IT to have them run the installs. <strong>IT Number</strong> 1-866-257-5984 Do not use the online IT services reauest, just call them.</p>
+<ol style="list-style-type: decimal">
+<li>Download the R programming language, if you have not already. Dowload the version for Windows and put it somewhere you can find on your computer (e.g., My Documents).</li>
+</ol>
+<p><a href="https://cran.r-project.org/bin/windows/base/old/3.4.4/" target="_blank">Download R</a></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Download R Studio, the prefered integrated development environemnt (IDE) for R. Dowload the version for Windows and put it somewhere you can find on your computer (e.g., My Documents). Select the <strong>FREE</strong> version to download.</li>
+</ol>
+<p><a href="https://www.rstudio.com/products/rstudio/download/" target="_blank">Download R Studio</a></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Download GIT, the primary file version control software for programming. Download the Windows version and put it somewhere you can find on your computer (e.g., My Documents).</li>
+</ol>
+<p><a href="https://git-scm.com/downloads" target="_blank">Download GIT for Windows</a></p>
+</div>
+</div>
+</div>
+<div id="lesson-1---setting-up-the-ide-and-basic-r-overview" class="section level1">
+<h1>Lesson 1 - Setting up the IDE and Basic R Overview</h1>
+<div id="navigating-file-directories-and-creating-an-r-poject" class="section level2">
+<h2>Navigating File Directories and Creating an R Poject</h2>
+<div id="r-studio---your-favorite-r-ide" class="section level3">
+<h3>R Studio - Your Favorite R IDE</h3>
+<div class="figure">
+<img src="img/rstudio1.JPG" />
+
+</div>
+</div>
+<div id="create-an-r-project" class="section level3">
+<h3>Create an R Project</h3>
+</div>
+</div>
+<div id="create-an-r-script" class="section level2">
+<h2>Create an R Script</h2>
+<ul>
+<li>Evertyhing in R is <code>Case-Sensitive</code></li>
+<li>Use a <code>.R</code> script file for your work, and use the <code>Console</code> for intermittent actions.</li>
+</ul>
+</div>
+<div id="basic-r-commands" class="section level2">
+<h2>Basic R Commands</h2>
+<ul>
+<li>get(wd) - Displays the working directory, where R will read from and write to.</li>
+<li>sessionInfo() - Displays R version, and attached function <code>packages</code></li>
+</ul>
+<pre class="r"><code>#Check working directory
+getwd()
+
+#Check out session info
+sessionInfo()</code></pre>
+</div>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 

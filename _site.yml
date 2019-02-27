@@ -1,10 +1,14 @@
 name: "LearnR"
 output_dir: "."
 navbar:
-  title: "LearnR"
+  title: "LearnR!"
   left:
     - text: "Home"
       href: index.html
+    
+    - text: "Lessons"
+      href: lessons.html
+      
     - text: "About"
       href: about.html
       

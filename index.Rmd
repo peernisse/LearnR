@@ -2,4 +2,8 @@
 title: "LearnR"
 ---
 
-Hello, World!
+This webpage is home to the Learn R! class.
+
+R is the gold standard for statistical computing in the science world.
+
+Use the navigation bar at the top to find out more information and view lessons.
