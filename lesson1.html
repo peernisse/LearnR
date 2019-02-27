@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Lesson 1 - Setting up the IDE and Basic R Overview</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">LearnR!</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="lesson1.html">Lesson 1</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Lesson 1 - Setting up the IDE and Basic R Overview</h1>
+
+</div>
+
+
+<div id="navigating-file-directories-and-creating-an-r-project" class="section level1">
+<h1><span class="header-section-number">1</span> Navigating File Directories and Creating an R Project</h1>
+<p>Let’s get RStudio up and running and discuss some of its features. Launch RStudio on your machine.</p>
+<div id="r-studio---your-favorite-r-ide" class="section level2">
+<h2><span class="header-section-number">1.1</span> R Studio - Your Favorite R IDE</h2>
+<p>The image below should look close to what you have when you launch RStudio. The <code>Console</code> command line is on the left, the <code>Environment</code> windows upper left and the <code>Navigator</code> tabs in lower left. This configuration can be modified later. If you like the dark theme, you can set it by going to <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code> &gt; and set <code>Theme</code> to <code>Modern</code>.</p>
+<div class="figure">
+<img src="img/rstudio1.JPG" />
+
+</div>
+</div>
+<div id="create-an-r-project" class="section level2">
+<h2><span class="header-section-number">1.2</span> Create an R Project</h2>
+<p>Creating an R Project is the best way to start any R undertaking.</p>
+<ul>
+<li>Navigate from R Studio and create a folder for this class called <code>LearnR</code> on your C drive or in My Documents.</li>
+<li>Use File &gt; New Project… &gt; Project in Existing Directory to create a project called <code>LearnR.Rproj</code> in your <code>LearnR</code> directory.</li>
+</ul>
+</div>
+<div id="create-an-r-script" class="section level2">
+<h2><span class="header-section-number">1.3</span> Create an R Script</h2>
+<ul>
+<li>Evertyhing in R is <code>Case-Sensitive</code></li>
+<li>Use a <code>.R</code> script file for your work, and use the <code>Console</code> for intermittent actions.</li>
+<li>Use <code>Shift + Ctrl + N</code> to open a new blank scripting window. Or File &gt; New File &gt; R Script.</li>
+<li>Save this file as <code>Lesson_1</code>.</li>
+</ul>
+</div>
+</div>
+<div id="basic-r-commands" class="section level1">
+<h1><span class="header-section-number">2</span> Basic R Commands</h1>
+<p>We will begin with basic R commands for understanding your programming environment and then move on to some examples of data types and basic manipulation.</p>
+<div id="checking-out-the-environment" class="section level2">
+<h2><span class="header-section-number">2.1</span> Checking out the Environment</h2>
+<ul>
+<li>get(wd) - Displays the working directory, where R will read from and write to.</li>
+<li>sessionInfo() - Displays R version, and attached <code>packages</code></li>
+</ul>
+<p>Try the following commands in your scripting window. Use <code>Ctrl + Enter</code> to run a line of code in the script window.</p>
+<pre class="r"><code>#Check working directory
+getwd()
+
+#Check out session info
+sessionInfo()</code></pre>
+</div>
+<div id="r-objects-and-classes" class="section level2">
+<h2><span class="header-section-number">2.2</span> R Objects and Classes</h2>
+<p>Now let’s look at R’s ability to vreate objects in memory and our ability to use and manipulate them.</p>
+<div id="vectors" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> Vectors</h3>
+<p>A vector is a <code>string</code> of numbers or text, or both. Mixed vectors of numbers and text will be stored as text.</p>
+<p>Make a vector and assign it to an object using the <code>&lt;-</code> operator and the “concatenate” <code>c()</code> operator. Then check the class of your vector using the <code>class()</code> operator, and its attributes using the <code>str()</code> operator.</p>
+<pre class="r"><code>#Make a vector into memory
+myVecN&lt;-c(1,2,3,4,5,6,7,8)
+myVecN</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8</code></pre>
+<pre class="r"><code>#Check its class
+class(myVecN)</code></pre>
+<pre><code>## [1] &quot;numeric&quot;</code></pre>
+<pre class="r"><code>#Check its other attributes
+str(myVecN)</code></pre>
+<pre><code>##  num [1:8] 1 2 3 4 5 6 7 8</code></pre>
+<pre class="r"><code>myVecL&lt;-c(&#39;one&#39;,&#39;two&#39;,&#39;three&#39;,&#39;four&#39;,&#39;five&#39;,&#39;six&#39;)
+class(myVecL)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<pre class="r"><code>str(myVecL)</code></pre>
+<pre><code>##  chr [1:6] &quot;one&quot; &quot;two&quot; &quot;three&quot; &quot;four&quot; &quot;five&quot; &quot;six&quot;</code></pre>
+<pre class="r"><code>#Remove the objects with rm()
+rm(myVecN,myVecL)</code></pre>
+<p>R is a <code>vectorized</code> programming language meaning it can perform calculations on every object in a vector at once:</p>
+<div class="figure">
+<img src="img/vector.png" />
+
+</div>
+<p>Multiply two vectors together.</p>
+<pre class="r"><code>v1&lt;-c(2,4,6,8,10)
+v2&lt;-c(1,1,2,2,0.5)
+v1*v2</code></pre>
+<pre><code>## [1]  2  4 12 16  5</code></pre>
+<pre class="r"><code>v1/v2</code></pre>
+<pre><code>## [1]  2  4  3  4 20</code></pre>
+</div>
+<div id="lists" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Lists</h3>
+</div>
+</div>
+<div id="create-a-list-and-explore-its-features" class="section level2">
+<h2><span class="header-section-number">2.3</span> Create a list and explore its features</h2>
+<ul>
+<li>Select certain objects from the list</li>
+</ul>
+<div id="data-frames" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> Data Frames</h3>
+</div>
+</div>
+<div id="create-a-data-frame-and-explore-its-features" class="section level2">
+<h2><span class="header-section-number">2.4</span> Create a data frame and explore its features</h2>
+<ul>
+<li>Check data frame dimensions</li>
+<li>Check column names</li>
+</ul>
+<div id="factors" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Factors</h3>
+</div>
+</div>
+<div id="r-data-sets" class="section level2">
+<h2><span class="header-section-number">2.5</span> R Data Sets</h2>
+<p>R and R packages have built-in data sets for practicing and developing your R code. We will explore the <code>iris</code> dataset and see some examples of data manipulation.</p>
+<p>You can view available data sets with the <code>data()</code> function. Try that now.</p>
+<div id="load-the-iris-data-set-into-memory" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Load the Iris Data Set into Memory</h3>
+<ul>
+<li>Learn about the data set form the help menu <code>help()</code></li>
+<li>Load the data frame</li>
+<li>Check out the data frame (<code>head()</code>, <code>tail()</code>, <code>names()</code>, <code>dim()</code>)</li>
+<li>Subset the data frame (<code>[,]</code>)</li>
+<li>Filter the data frame (<code>subset()</code>)</li>
+<li>Rename columns (<code>$</code>,<code>colnames</code>)</li>
+<li>Create a new column (<code>$</code>)</li>
+</ul>
+<pre class="r"><code>#Load the iris data set to an object called myDF
+myDF&lt;-iris
+
+#Check out the documentation for the iris data set
+help(iris)
+
+#Check out the df
+dim(myDF)</code></pre>
+<pre><code>## [1] 150   5</code></pre>
+<pre class="r"><code>#Check out the structure and attributes
+str(myDF)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre class="r"><code>#Check out the first 10 records
+head(myDF,10)</code></pre>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1           5.1         3.5          1.4         0.2  setosa
+## 2           4.9         3.0          1.4         0.2  setosa
+## 3           4.7         3.2          1.3         0.2  setosa
+## 4           4.6         3.1          1.5         0.2  setosa
+## 5           5.0         3.6          1.4         0.2  setosa
+## 6           5.4         3.9          1.7         0.4  setosa
+## 7           4.6         3.4          1.4         0.3  setosa
+## 8           5.0         3.4          1.5         0.2  setosa
+## 9           4.4         2.9          1.4         0.2  setosa
+## 10          4.9         3.1          1.5         0.1  setosa</code></pre>
+<pre class="r"><code>#Check out the last 5 records
+tail(myDF,5)</code></pre>
+<pre><code>##     Sepal.Length Sepal.Width Petal.Length Petal.Width   Species
+## 146          6.7         3.0          5.2         2.3 virginica
+## 147          6.3         2.5          5.0         1.9 virginica
+## 148          6.5         3.0          5.2         2.0 virginica
+## 149          6.2         3.4          5.4         2.3 virginica
+## 150          5.9         3.0          5.1         1.8 virginica</code></pre>
+<pre class="r"><code>#Check out the column names
+names(myDF)</code></pre>
+<pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## [5] &quot;Species&quot;</code></pre>
+<pre class="r"><code>#Rename a column
+colnames(myDF)[5]&lt;-&#39;SPECIES&#39;
+
+#Rename all columns
+names(myDF)</code></pre>
+<pre><code>## [1] &quot;Sepal.Length&quot; &quot;Sepal.Width&quot;  &quot;Petal.Length&quot; &quot;Petal.Width&quot; 
+## [5] &quot;SPECIES&quot;</code></pre>
+<pre class="r"><code>names(myDF)&lt;-c(&#39;SP_LENGTH&#39;,&#39;SP_WIDTH&#39;,&#39;PTL_LENGTH&#39;,&#39;PTL_WIDTH&#39;,&#39;SPECIES&#39;)
+names(myDF)</code></pre>
+<pre><code>## [1] &quot;SP_LENGTH&quot;  &quot;SP_WIDTH&quot;   &quot;PTL_LENGTH&quot; &quot;PTL_WIDTH&quot;  &quot;SPECIES&quot;</code></pre>
+</div>
+<div id="calculate-a-summary-of-the-iris-data" class="section level3">
+<h3><span class="header-section-number">2.5.2</span> Calculate a summary of the Iris data</h3>
+<ul>
+<li>Summarize the data in the <code>iris</code> data frame.</li>
+</ul>
+<pre class="r"><code>summary(myDF)</code></pre>
+<pre><code>##    SP_LENGTH        SP_WIDTH       PTL_LENGTH      PTL_WIDTH    
+##  Min.   :4.300   Min.   :2.000   Min.   :1.000   Min.   :0.100  
+##  1st Qu.:5.100   1st Qu.:2.800   1st Qu.:1.600   1st Qu.:0.300  
+##  Median :5.800   Median :3.000   Median :4.350   Median :1.300  
+##  Mean   :5.843   Mean   :3.057   Mean   :3.758   Mean   :1.199  
+##  3rd Qu.:6.400   3rd Qu.:3.300   3rd Qu.:5.100   3rd Qu.:1.800  
+##  Max.   :7.900   Max.   :4.400   Max.   :6.900   Max.   :2.500  
+##        SPECIES  
+##  setosa    :50  
+##  versicolor:50  
+##  virginica :50  
+##                 
+##                 
+## </code></pre>
+</div>
+<div id="plot-the-iris-data" class="section level3">
+<h3><span class="header-section-number">2.5.3</span> Plot the Iris Data</h3>
+<ul>
+<li>Use the <code>plot()</code> function.</li>
+<li>Use the <code>boxplot()</code> function.</li>
+</ul>
+<p><strong>Scatterplot</strong></p>
+<pre class="r"><code>plot(myDF$SP_LENGTH~myDF$SP_WIDTH, col = myDF$SPECIES)</code></pre>
+<p><img src="lesson1_files/figure-html/plotiris-1.png" width="672" /></p>
+<p><strong>Boxplot of Petal Length</strong></p>
+<pre class="r"><code>boxplot(myDF$PTL_LENGTH~myDF$SPECIES, xlab=&#39;Species&#39;,ylab=&#39;Petal Length (in)&#39;)</code></pre>
+<p><img src="lesson1_files/figure-html/bplotiris-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+<div id="exercises" class="section level1">
+<h1><span class="header-section-number">3</span> Exercises</h1>
+<div id="old-faithful-geyser-data" class="section level2">
+<h2><span class="header-section-number">3.1</span> Old Faithful Geyser Data</h2>
+<p>Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use <code>help(faithful)</code> in the console to bring up info about the data set. You can reveal the code and results with the buttons below.</p>
+<ol style="list-style-type: decimal">
+<li>Load the <code>faithful</code> data set and assign it to an object called <code>faithful</code>. Use <code>head()</code> to check the object.</li>
+</ol>
+<div class="fold s o">
+<pre class="r"><code>faithful&lt;-faithful
+head(faithful)</code></pre>
+<pre><code>##   eruptions waiting
+## 1     3.600      79
+## 2     1.800      54
+## 3     3.333      74
+## 4     2.283      62
+## 5     4.533      85
+## 6     2.883      55</code></pre>
+</div>
+<ol start="2" style="list-style-type: decimal">
+<li>Check out the attributes and dimensions of the data set with <code>dim()</code> and <code>str()</code>.</li>
+</ol>
+<div class="fold s o">
+<pre class="r"><code>dim(faithful)</code></pre>
+<pre><code>## [1] 272   2</code></pre>
+<pre class="r"><code>str(faithful)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    272 obs. of  2 variables:
+##  $ eruptions: num  3.6 1.8 3.33 2.28 4.53 ...
+##  $ waiting  : num  79 54 74 62 85 55 88 85 51 85 ...</code></pre>
+</div>
+<ol start="3" style="list-style-type: decimal">
+<li>Summarize the columns of the data frame columns with <code>summary()</code>.</li>
+</ol>
+<div class="fold s o">
+<pre class="r"><code>summary(faithful)</code></pre>
+<pre><code>##    eruptions        waiting    
+##  Min.   :1.600   Min.   :43.0  
+##  1st Qu.:2.163   1st Qu.:58.0  
+##  Median :4.000   Median :76.0  
+##  Mean   :3.488   Mean   :70.9  
+##  3rd Qu.:4.454   3rd Qu.:82.0  
+##  Max.   :5.100   Max.   :96.0</code></pre>
+</div>
+<ol start="4" style="list-style-type: decimal">
+<li>Plot waiting time on the x axis and eruptions on the y axis using the <code>plot()</code> function.</li>
+</ol>
+<div class="fold s o">
+<pre class="r"><code>plot(faithful$eruptions~faithful$waiting)</code></pre>
+<p><img src="lesson1_files/figure-html/faithful4-1.png" width="672" /></p>
+</div>
+</div>
+<div id="motor-trend-cars-data-set" class="section level2">
+<h2><span class="header-section-number">3.2</span> Motor Trend Cars Data Set</h2>
+<script src="js/hideOutput.js"></script>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

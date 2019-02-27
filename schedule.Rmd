@@ -1,0 +1,14 @@
+---
+title: "Schdedule"
+---
+
+
+This schedule is tentative and may change as we go along.
+
+| Lesson                                  | Date             | Topics                                                  |
+| --------------------------------------- | ---------------- | ------------------------------------------------------- |
+| Lesson 1 - Setting up the IDE and Basic R Overview | March 8, 2019    | RStudio, basic R commands, object types   |
+| Lesson 2 - GIT and Data Sources, Data Wrangling | March 15, 2019    | Github, GIT, Getting and Cleaning Data, tidyverse |
+| Lesson 3 - Data wrangling 2, ggplot2 | March 22, 2019    | More data wrangling, plotting with ggplot2 |
+| Lesson 4 - ggplot2, plotting output options | March 29, 2019    | Plotting in a loop, outputting to PDF, jpeg. |
+| TBD | April 5, 2019 | TBD |

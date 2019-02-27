@@ -1,0 +1,256 @@
+---
+title: "Lesson 1 - Setting up the IDE and Basic R Overview"
+output: 
+        html_document:
+          #code_folding: show
+          toc: true
+          toc_float: 
+                collapsed: false
+                smooth_scroll: true
+                toc_depth: 3
+          number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
+```
+
+
+# Navigating File Directories and Creating an R Project
+Let's get RStudio up and running and discuss some of its features. Launch RStudio on your machine.
+
+## R Studio - Your Favorite R IDE
+The image below should look close to what you have when you launch RStudio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator` tabs in lower left. This configuration can be modified later.
+If you like the dark theme, you can set it by going to `Tools` > `Global Options` > `Appearance` > and set `Theme` to `Modern`. 
+
+![](./img/rstudio1.jpg)
+
+## Create an R Project
+Creating an R Project is the best way to start any R undertaking.
+
+* Navigate from R Studio and create a folder for this class called `LearnR` on your C drive or in My Documents.
+* Use File > New Project... > Project in Existing Directory to create a project called `LearnR.Rproj` in your `LearnR` directory.
+
+## Create an R Script
+* Evertyhing in R is `Case-Sensitive`
+* Use a `.R` script file for your work, and use the `Console` for intermittent actions.
+* Use `Shift + Ctrl + N` to open a new blank scripting window. Or File > New File > R Script.
+* Save this file as `Lesson_1`.
+
+# Basic R Commands
+We will begin with basic R commands for understanding your programming environment and then move on to some examples of data types and basic manipulation.
+
+## Checking out the Environment
+
+* get(wd) - Displays the working directory, where R will read from and write to.
+* sessionInfo() - Displays R version, and attached `packages`
+
+Try the following commands in your scripting window. Use `Ctrl + Enter` to run a line of code in the script window.
+
+```{r brc, results='hide'}
+
+#Check working directory
+getwd()
+
+#Check out session info
+sessionInfo()
+
+```
+
+
+## R Objects and Classes
+Now let's look at R's ability to vreate objects in memory and our ability to use and manipulate them.
+
+### Vectors
+A vector is a `string` of numbers or text, or both. Mixed vectors of numbers and text will be stored as text.
+
+Make a vector and assign it to an object using the `<-` operator and the "concatenate" `c()` operator. Then check the class of your vector using the `class()` operator, and its attributes using the `str()` operator.
+
+```{r vec, results='markup'}
+#Make a vector into memory
+myVecN<-c(1,2,3,4,5,6,7,8)
+myVecN
+
+#Check its class
+class(myVecN)
+
+#Check its other attributes
+str(myVecN)
+
+myVecL<-c('one','two','three','four','five','six')
+class(myVecL)
+str(myVecL)
+
+#Remove the objects with rm()
+rm(myVecN,myVecL)
+
+```
+
+R is a `vectorized` programming language meaning it can perform calculations on every object in a vector at once:
+
+![](./img/vector.png)
+
+Multiply two vectors together.
+
+```{r vecs}
+v1<-c(2,4,6,8,10)
+v2<-c(1,1,2,2,0.5)
+v1*v2
+v1/v2
+
+```
+
+
+### Lists
+
+## Create a list and explore its features
+
+* Select certain objects from the list
+
+### Data Frames
+
+## Create a data frame and explore its features
+
+* Check data frame dimensions
+* Check column names
+
+### Factors
+
+## R Data Sets
+R and R packages have built-in data sets for practicing and developing your R code. We will explore the `iris` dataset and see some examples of data manipulation.
+
+You can view available data sets with the `data()` function. Try that now.
+
+### Load the Iris Data Set into Memory
+
+* Learn about the data set form the help menu `help()`
+* Load the data frame
+* Check out the data frame (`head()`, `tail()`, `names()`, `dim()`)
+* Subset the data frame (`[,]`)
+* Filter the data frame (`subset()`)
+* Rename columns (`$`,`colnames`)
+* Create a new column (`$`)
+
+```{r iris1}
+#Load the iris data set to an object called myDF
+myDF<-iris
+
+#Check out the documentation for the iris data set
+help(iris)
+
+#Check out the df
+dim(myDF)
+#Check out the structure and attributes
+str(myDF)
+#Check out the first 10 records
+head(myDF,10)
+#Check out the last 5 records
+tail(myDF,5)
+#Check out the column names
+names(myDF)
+
+#Rename a column
+colnames(myDF)[5]<-'SPECIES'
+
+#Rename all columns
+names(myDF)
+names(myDF)<-c('SP_LENGTH','SP_WIDTH','PTL_LENGTH','PTL_WIDTH','SPECIES')
+names(myDF)
+
+```
+
+
+### Calculate a summary of the Iris data
+
+* Summarize the data in the `iris` data frame.
+
+```{r irissumm}
+summary(myDF)
+
+```
+
+
+### Plot the Iris Data
+
+* Use the `plot()` function.
+* Use the `boxplot()` function.
+
+**Scatterplot**
+
+```{r plotiris}
+plot(myDF$SP_LENGTH~myDF$SP_WIDTH, col = myDF$SPECIES)
+
+```
+
+**Boxplot of Petal Length**
+
+```{r bplotiris}
+boxplot(myDF$PTL_LENGTH~myDF$SPECIES, xlab='Species',ylab='Petal Length (in)')
+
+```
+
+
+# Exercises
+
+## Old Faithful Geyser Data
+
+Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use `help(faithful)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below.
+
+1. Load the `faithful` data set and assign it to an object called `faithful`. Use `head()` to check the object.
+
+<div class="fold s o">
+
+```{r faithful1}
+faithful<-faithful
+head(faithful)
+
+```
+
+
+</div>
+
+
+2. Check out the attributes and dimensions of the data set with `dim()` and `str()`.
+
+<div class="fold s o">
+
+```{r faithful2}
+
+dim(faithful)
+str(faithful)
+
+```
+
+
+</div>
+
+3. Summarize the columns of the data frame columns with `summary()`.
+
+<div class="fold s o">
+
+```{r faithful3}
+summary(faithful)
+
+```
+
+
+</div>
+
+4. Plot waiting time on the x axis and eruptions on the y axis using the `plot()` function.
+
+<div class="fold s o">
+
+```{r faithful4}
+
+plot(faithful$eruptions~faithful$waiting)
+
+```
+
+
+</div>
+
+
+## Motor Trend Cars Data Set
+
+
+<script src="js/hideOutput.js"></script>

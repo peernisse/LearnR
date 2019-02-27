@@ -1,9 +1,41 @@
 ---
-title: "LearnR"
+title: "Learn R! Home"
 ---
 
-This webpage is home to the Learn R! class.
+# Introduction
+This class will consist of 6-8 two-hour session held Friday mornings at 7. We will hold it in a conference room in SLC office, and by Skype.
 
 R is the gold standard for statistical computing in the science world.
 
-Use the navigation bar at the top to find out more information and view lessons.
+Use the navigation bar at the top to find out more information and view lessons for this course.
+
+
+## Prerequesites
+You need only a desire to improve your data handling and analysis skills and a few installs of software on your computer!
+
+### Installs
+The following steps will set you up for the class. You will need to download the `.exe` files somewhere on your hard drive, then call IT to have them run the installs. **IT Number** 1-866-257-5984. Do not use the online IT services request, just call them.
+
+
+1. Download the R programming language, if you have not already. Dowload the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Have IT install it.
+
+[Download R](https://cran.r-project.org/bin/windows/base/old/3.4.4/){target="_blank"}
+
+2. Download R Studio, the prefered integrated development environemnt (IDE) for R. Dowload the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Select the **FREE** version to download. Have IT install it.
+
+[Download R Studio](https://www.rstudio.com/products/rstudio/download/){target="_blank"}
+
+
+3. **OPTIONAL.  **Download GIT, a popular file version control software for programming. Download the Windows version and put it somewhere  you can find on your computer (e.g., My Documents). Have IT install it.
+
+[Download GIT for Windows](https://git-scm.com/downloads){target="_blank"}
+
+**When installing GIT, just follow all default installation options.**
+
+Then, configure your username an email. This can also be changed later if you are having trouble.
+
+`Open GitBash command line from the Start menu and enter the following commands`
+
+`git config --global --user.name "the name you want to have GIT record you as"`
+
+`git config --global --user.email "your email"`

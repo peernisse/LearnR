@@ -3,4 +3,17 @@ title: "About This Class"
 ---
 
 # Introduction
-This class will consist of 6-8 two-hour session held Friday mornings at 7.
+This class will consist of 6-8 two-hour session held Friday mornings at 7. Refer to the shcedule for lesson contents.
+This site will be updated with lessons as we go along.
+
+**Instructor:** Peter EerNisse
+
+[eMail](mailto:peter.eernisse@stantec.com)
+
+[github](https://github.com/peernisse)
+
+[Data Analysis and Statistics Website](http://collaboration/sites/ESPA/IS/methods/SitePages/DAS_Home.aspx)
+
+[Yammer](https://www.yammer.com/stantec.com/#/threads/inGroup?type=in_group&feedId=11318855)
+
+
