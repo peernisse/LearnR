@@ -24,4 +24,6 @@ Just use Google!
 
 The swirl() package has lots of hands on lessons that run right in your IDE.
 `install.packages("swirl")`
+Then fire it up and start practicing.
+
 
