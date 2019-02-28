@@ -418,10 +418,10 @@ div.tocify {
 <hr>
 <div id="navigating-file-directories-and-creating-an-r-project" class="section level1">
 <h1>Navigating File Directories and Creating an R Project</h1>
-<p>Let’s get RStudio up and running and discuss some of its features. Launch RStudio on your machine.</p>
+<p>Let’s get R Studio up and running and discuss some of its features. Launch R Studio on your machine.</p>
 <div id="r-studio---your-favorite-r-ide" class="section level2">
 <h2>R Studio - Your Favorite R IDE</h2>
-<p>The image below should look close to what you have when you launch RStudio. The <code>Console</code> command line is on the left, the <code>Environment</code> windows upper left and the <code>Navigator and Preview</code> tabs in lower right. This configuration can be modified later.</p>
+<p>The image below should look close to what you have when you launch R Studio. The <code>Console</code> command line is on the left, the <code>Environment</code> windows upper left and the <code>Navigator and Preview</code> tabs in lower right. This configuration can be modified later.</p>
 <p>If you like the dark theme, you can set it by going to <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code> &gt; and set <code>Theme</code> to <code>Modern</code>.</p>
 <div class="figure">
 <img src="img/rstudio1.JPG" />
@@ -439,7 +439,7 @@ div.tocify {
 <div id="create-an-r-script" class="section level2">
 <h2>Create an R Script</h2>
 <ul>
-<li>Evertyhing in R is <code>Case-Sensitive</code></li>
+<li>Everything in R is <code>Case-Sensitive</code></li>
 <li>Use a <code>.R</code> script file for your work, and use the <code>Console</code> for intermittent actions.</li>
 <li>Use <code>Shift + Ctrl + N</code> to open a new blank scripting window. Or File &gt; New File &gt; R Script.</li>
 <li>Save this file as <code>Lesson_1</code>.</li>
@@ -465,7 +465,7 @@ sessionInfo()</code></pre>
 </div>
 <div id="r-objects-and-classes" class="section level2">
 <h2>R Objects and Classes</h2>
-<p>Now let’s look at R’s ability to vreate objects in memory and our ability to use and manipulate them.</p>
+<p>Now let’s look at R’s ability to create objects in memory and our ability to use and manipulate them.</p>
 <div id="vectors" class="section level3">
 <h3>Vectors</h3>
 <p>A vector is a <code>string</code> of numbers or text, or both. Mixed vectors of numbers and text will be stored as text.</p>
@@ -522,7 +522,7 @@ v1*v2</code></pre>
 </div>
 <div id="r-data-sets" class="section level2">
 <h2>R Data Sets</h2>
-<p>R and R packages have built-in data sets for practicing and developing your R code. We will explore the <code>iris</code> dataset and see some examples of data manipulation.</p>
+<p>R and R packages have built-in data sets for practicing and developing your R code. We will explore the <code>iris</code> data set and see some examples of data manipulation.</p>
 <p>You can view available data sets with the <code>data()</code> function. Try that now.</p>
 <div id="load-the-iris-data-set-into-memory-and-check-out-the-data" class="section level3">
 <h3>Load the Iris Data Set into Memory and Check out the Data</h3>
@@ -687,7 +687,7 @@ abline(mdl)</code></pre>
 <h1>Exercises</h1>
 <div id="old-faithful-geyser-data" class="section level2">
 <h2>Old Faithful Geyser Data</h2>
-<p>Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use <code>help(faithful)</code> in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.</p>
+<p>Perform the following exercises with the Old Faithful data set in your Lesson 1 script so you have the code for reference. Use <code>help(faithful)</code> in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.</p>
 <ol style="list-style-type: decimal">
 <li>Load the <code>faithful</code> data set and assign it to an object called <code>faithful</code>. Use <code>head()</code> to check the object.</li>
 </ol>
@@ -727,7 +727,7 @@ head(faithful)</code></pre>
 ##  Max.   :5.100   Max.   :96.0</code></pre>
 </div>
 <ol start="4" style="list-style-type: decimal">
-<li>Make a linear model and scatterplot of waiting time on the x axis and eruptions on the y axis using the <code>plot()</code> and <code>lm()</code> and <code>abline()</code> functions. Is there a relationship between wait time and the length of eruption?</li>
+<li>Make a linear model and scatter plot of waiting time on the x axis and eruptions on the y axis using the <code>plot()</code> and <code>lm()</code> and <code>abline()</code> functions. Is there a relationship between wait time and the length of eruption?</li>
 </ol>
 <div class="fold s o">
 <pre class="r"><code>mdl&lt;-lm(faithful$eruptions~faithful$waiting)
@@ -759,7 +759,7 @@ abline(mdl)</code></pre>
 <h2>Motor Trend Cars Data Set</h2>
 <p>Perform the following exercises with the Motor Trend <code>mtcars</code> data set in your Lesson 1 script so you have the code for reference. Use <code>?(mtcars)</code> in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.</p>
 <ol style="list-style-type: decimal">
-<li>Load the <code>cars</code> data set and assign it to an object called <code>cars</code>.</li>
+<li>Load the <code>mtcars</code> data set and assign it to an object called <code>cars</code>.</li>
 </ol>
 <div class="fold s o">
 <pre class="r"><code>cars&lt;-mtcars
@@ -774,7 +774,18 @@ head(cars,10)</code></pre>
 ## Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
 ## Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
 ## Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
+## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+##                                 Car
+## Mazda RX4                 Mazda RX4
+## Mazda RX4 Wag         Mazda RX4 Wag
+## Datsun 710               Datsun 710
+## Hornet 4 Drive       Hornet 4 Drive
+## Hornet Sportabout Hornet Sportabout
+## Valiant                     Valiant
+## Duster 360               Duster 360
+## Merc 240D                 Merc 240D
+## Merc 230                   Merc 230
+## Merc 280                   Merc 280</code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>Select out just the variables <code>mpg</code> and <code>wt</code> and assign it to a new data frame called <code>carsMPG</code></li>
@@ -782,7 +793,7 @@ head(cars,10)</code></pre>
 <div class="fold s o">
 <pre class="r"><code>names(cars)</code></pre>
 <pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot;</code></pre>
+## [11] &quot;carb&quot; &quot;Car&quot;</code></pre>
 <pre class="r"><code>carsMPG&lt;-cars[,c(1,6)]
 head(carsMPG)</code></pre>
 <pre><code>##                    mpg    wt
@@ -794,7 +805,7 @@ head(carsMPG)</code></pre>
 ## Valiant           18.1 3.460</code></pre>
 </div>
 <ol start="3" style="list-style-type: decimal">
-<li>Make a linear model and scatterplot with best-fit line of the <code>carsMPG</code> data frame of weight on the x axis and miles per gallon on the y axis. Is there a relationship between weight and mpg?</li>
+<li>Make a linear model and scatter plot with best-fit line of the <code>carsMPG</code> data frame of weight on the x axis and miles per gallon on the y axis. Is there a relationship between weight and mpg?</li>
 </ol>
 <div class="fold s o">
 <pre class="r"><code>mdl&lt;-lm(carsMPG$mpg~carsMPG$wt)

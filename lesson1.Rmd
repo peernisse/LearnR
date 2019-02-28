@@ -17,10 +17,10 @@ knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE
 
 <hr>
 # Navigating File Directories and Creating an R Project
-Let's get RStudio up and running and discuss some of its features. Launch RStudio on your machine.
+Let's get R Studio up and running and discuss some of its features. Launch R Studio on your machine.
 
 ## R Studio - Your Favorite R IDE
-The image below should look close to what you have when you launch RStudio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator and Preview` tabs in lower right. This configuration can be modified later.
+The image below should look close to what you have when you launch R Studio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator and Preview` tabs in lower right. This configuration can be modified later.
 
 If you like the dark theme, you can set it by going to `Tools` > `Global Options` > `Appearance` > and set `Theme` to `Modern`. 
 
@@ -33,7 +33,7 @@ Creating an R Project is the best way to start any R undertaking.
 * Use File > New Project... > Project in Existing Directory to create a project called `LearnR.Rproj` in your `LearnR` directory.
 
 ## Create an R Script
-* Evertyhing in R is `Case-Sensitive`
+* Everything in R is `Case-Sensitive`
 * Use a `.R` script file for your work, and use the `Console` for intermittent actions.
 * Use `Shift + Ctrl + N` to open a new blank scripting window. Or File > New File > R Script.
 * Save this file as `Lesson_1`.
@@ -61,7 +61,7 @@ sessionInfo()
 
 
 ## R Objects and Classes
-Now let's look at R's ability to vreate objects in memory and our ability to use and manipulate them.
+Now let's look at R's ability to create objects in memory and our ability to use and manipulate them.
 
 ### Vectors
 A vector is a `string` of numbers or text, or both. Mixed vectors of numbers and text will be stored as text.
@@ -121,7 +121,7 @@ Create a data frame and explore its features
 Understand what a factor is, and when to use it or not use it.
 
 ## R Data Sets
-R and R packages have built-in data sets for practicing and developing your R code. We will explore the `iris` dataset and see some examples of data manipulation.
+R and R packages have built-in data sets for practicing and developing your R code. We will explore the `iris` data set and see some examples of data manipulation.
 
 You can view available data sets with the `data()` function. Try that now.
 
@@ -235,7 +235,7 @@ qqnorm(myDF$PTL_LENGTH,col=myDF$SPECIES)
 
 ## Old Faithful Geyser Data
 
-Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use `help(faithful)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.
+Perform the following exercises with the Old Faithful data set in your Lesson 1 script so you have the code for reference. Use `help(faithful)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.
 
 1. Load the `faithful` data set and assign it to an object called `faithful`. Use `head()` to check the object.
 
@@ -277,7 +277,7 @@ summary(faithful)
 
 </div>
 
-4. Make a linear model and scatterplot of waiting time on the x axis and eruptions on the y axis using the `plot()` and `lm()` and `abline()` functions. Is there a relationship between wait time and the length of eruption?
+4. Make a linear model and scatter plot of waiting time on the x axis and eruptions on the y axis using the `plot()` and `lm()` and `abline()` functions. Is there a relationship between wait time and the length of eruption?
 
 <div class="fold s o">
 
@@ -296,7 +296,7 @@ abline(mdl)
 ## Motor Trend Cars Data Set
 Perform the following exercises with the Motor Trend `mtcars` data set in your Lesson 1 script so you have the code for reference. Use `?(mtcars)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.
 
-1. Load the `cars` data set and assign it to an object called `cars`.
+1. Load the `mtcars` data set and assign it to an object called `cars`.
 
 <div class="fold s o">
 
@@ -321,7 +321,7 @@ head(carsMPG)
 
 </div>
 
-3. Make a linear model and scatterplot with best-fit line of the `carsMPG` data frame of weight on the x axis and miles per gallon on the y axis. Is there a relationship between weight and mpg?
+3. Make a linear model and scatter plot with best-fit line of the `carsMPG` data frame of weight on the x axis and miles per gallon on the y axis. Is there a relationship between weight and mpg?
 
 <div class="fold s o">
 
