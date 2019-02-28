@@ -1,32 +1,74 @@
 ---
-title: "Learn R! Home"
+title: "Learn R!"
 ---
 
-# Introduction
-This class will consist of 6-8 two-hour session held Friday mornings at 7. We will hold it in a conference room in SLC office, and by Skype.
+This class will consist of 6-8 two-hour session held Friday mornings at 8. We will hold it in a conference room in SLC office, and by Skype.
 
-R is the gold standard for statistical computing in the science world.
+`R` is one of the most popular programming languages for statistical computing in the science world along with `Python`.
 
 Use the navigation bar at the top to find out more information and view lessons for this course.
 
+I look forward to going through this course. We have several folks in the class who already use R so there should be a lot to learn!
 
-## Prerequesites
+
+
+![](./img/programmer.png)
+
+<hr>
+# Why R, or any Programming Language, Really?
+There are many reasons why learning to do your work in R or another programming language `python?` is the way to go. Minimize all those copies of copies of Excel files on your project, and you will never look back!
+
+There are many options for doing analysis in a programming language, but this class is all about R!
+
+Excel does not appear in this plot...
+
+
+![](./img/lang-rank-118.png)
+
+
+
+
+1. More powerful data manipulation capabilities
+2. Easier automation
+3. Faster computation
+4. It reads any type of data
+5. Easier project organization
+6. It supports larger data sets
+7. **Reproducibility (important for detecting and fixing errors, and SCIENCE! Try explaining all the manual gymnastics you did in your Excel analysis when there is no record of it)**
+8. **Less files! Version control and collaboration with GIT!**
+9. Easier to find and fix errors
+9. It's free and open source
+10. Advanced Statistics capabilities
+11. State-of-the-art graphics
+12. Interactive reports
+13. **Huge online community to learn from and troubleshoot your code**
+
+
+https://blog.revolutionanalytics.com/2014/10/why-r-is-better-than-excel.html
+
+https://fantasyfootballanalytics.net/2014/01/why-r-is-better-than-excel.html
+
+
+<hr>
+# Prerequesites for this Class
+
 You need only a desire to improve your data handling and analysis skills and a few installs of software on your computer!
 
+
 ### Installs
-The following steps will set you up for the class. You will need to download the `.exe` files somewhere on your hard drive, then call IT to have them run the installs. **IT Number** 1-866-257-5984. Do not use the online IT services request, just call them.
+The following steps will set you up for the class. You will need to download the `.exe` installation files somewhere on your hard drive, then call IT to have them run the installs. **IT Number** 1-866-257-5984. Do not use the online IT services request, just call them.
 
 
-1. Download the R programming language, if you have not already. Dowload the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Have IT install it.
+1. Download the R programming language, if you have not already. Download the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Have IT install it.
 
 [Download R](https://cran.r-project.org/bin/windows/base/old/3.4.4/){target="_blank"}
 
-2. Download R Studio, the prefered integrated development environemnt (IDE) for R. Dowload the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Select the **FREE** version to download. Have IT install it.
+2. Download R Studio, the preferred integrated development environment (IDE) for R. Download the version for Windows and put it somewhere  you can find on your computer (e.g., My Documents). Select the **FREE** version to download. Have IT install it.
 
 [Download R Studio](https://www.rstudio.com/products/rstudio/download/){target="_blank"}
 
 
-3. **OPTIONAL.  **Download GIT, a popular file version control software for programming. Download the Windows version and put it somewhere  you can find on your computer (e.g., My Documents). Have IT install it.
+3. **OPTIONAL.  **Download GIT, a popular file version control software for programming. Download the Windows version and put it somewhere you can find on your computer (e.g., My Documents). Have IT install it.
 
 [Download GIT for Windows](https://git-scm.com/downloads){target="_blank"}
 
@@ -39,3 +81,4 @@ Then, configure your username an email. This can also be changed later if you ar
 `git config --global --user.name "the name you want to have GIT record you as"`
 
 `git config --global --user.email "your email"`
+

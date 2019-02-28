@@ -1,0 +1,27 @@
+---
+title: "R Resources"
+---
+
+This page has links to lots of great R learning resources. You put in the time, you will be crushing it with R in no time!
+
+<hr>
+# Tutorials
+
+https://www.rforcats.net/
+
+In R console type `help.start()`
+
+http://cran.r-project.org/doc/manuals/r-release/R-intro.html
+
+https://www.datacamp.com/courses/free-introduction-to-r
+
+
+Just use Google!
+
+
+<hr>
+# SWIRL
+
+The swirl() package has lots of hands on lessons that run right in your IDE.
+`install.packages("swirl")`
+

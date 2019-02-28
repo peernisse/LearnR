@@ -8,19 +8,20 @@ output:
                 collapsed: false
                 smooth_scroll: true
                 toc_depth: 3
-          number_sections: true
+          number_sections: false
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
 ```
 
-
+<hr>
 # Navigating File Directories and Creating an R Project
 Let's get RStudio up and running and discuss some of its features. Launch RStudio on your machine.
 
 ## R Studio - Your Favorite R IDE
-The image below should look close to what you have when you launch RStudio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator` tabs in lower left. This configuration can be modified later.
+The image below should look close to what you have when you launch RStudio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator and Preview` tabs in lower right. This configuration can be modified later.
+
 If you like the dark theme, you can set it by going to `Tools` > `Global Options` > `Appearance` > and set `Theme` to `Modern`. 
 
 ![](./img/rstudio1.jpg)
@@ -37,6 +38,7 @@ Creating an R Project is the best way to start any R undertaking.
 * Use `Shift + Ctrl + N` to open a new blank scripting window. Or File > New File > R Script.
 * Save this file as `Lesson_1`.
 
+<hr>
 # Basic R Commands
 We will begin with basic R commands for understanding your programming environment and then move on to some examples of data types and basic manipulation.
 
@@ -123,23 +125,20 @@ R and R packages have built-in data sets for practicing and developing your R co
 
 You can view available data sets with the `data()` function. Try that now.
 
-### Load the Iris Data Set into Memory
+### Load the Iris Data Set into Memory and Check out the Data
 
 * Learn about the data set form the help menu `help()`
 * Load the data frame
-* Check out the data frame (`head()`, `tail()`, `names()`, `dim()`)
+* Check out the data frame (`head()`, `tail()`, `names()`, `dim()`, `unique()`,`table()`)
 * Subset the data frame (`[,]`)
-* Filter the data frame (`subset()`)
 * Rename columns (`$`,`colnames`)
 * Create a new column (`$`)
+
+You can view details about a `data set` with the `help()` or `?` functions. Try running `help(iris)` or `?iris` in the console now.
 
 ```{r iris1}
 #Load the iris data set to an object called myDF
 myDF<-iris
-
-#Check out the documentation for the iris data set
-help(iris)
-
 #Check out the df
 dim(myDF)
 #Check out the structure and attributes
@@ -148,17 +147,26 @@ str(myDF)
 head(myDF,10)
 #Check out the last 5 records
 tail(myDF,5)
+#Checkout the unique values in the 'Species' column
+unique(myDF$Species)
+#Check out how many of each
+table(myDF$Species)
+#Subset just some columns and rows [rows index, columns index]
+myDF[c(1:5),c(5,1)]
+#Filter based on column values
+setosa<-myDF[myDF$Species == 'setosa',] #The logical operator '==' is used to declare equivalency
+
+dim(setosa)
+
+head(setosa)
 #Check out the column names
 names(myDF)
-
 #Rename a column
 colnames(myDF)[5]<-'SPECIES'
-
 #Rename all columns
 names(myDF)
 names(myDF)<-c('SP_LENGTH','SP_WIDTH','PTL_LENGTH','PTL_WIDTH','SPECIES')
 names(myDF)
-
 ```
 
 
@@ -174,15 +182,32 @@ summary(myDF)
 
 ### Plot the Iris Data
 
-* Use the `plot()` function.
+* Use the `plot()` function and the `lm()` function.
 * Use the `boxplot()` function.
+* Use the `hist()` function.
+* Use the `qqnorm()` function.
 
 **Scatterplot**
 
 ```{r plotiris}
+
 plot(myDF$SP_LENGTH~myDF$SP_WIDTH, col = myDF$SPECIES)
 
 ```
+
+**Scatterplot with Best Fit Line**
+Make a linear model of the data with `lm()` and assign it to an object `mdl`, then add it to the plot.
+
+```{r plotiris2}
+#Make linear model with lm() and assign it to an object 
+mdl<-lm(myDF$SP_LENGTH~myDF$SP_WIDTH)
+summary(mdl)
+
+plot(myDF$SP_LENGTH~myDF$SP_WIDTH, col = myDF$SPECIES)
+abline(mdl)
+
+```
+
 
 **Boxplot of Petal Length**
 
@@ -191,12 +216,26 @@ boxplot(myDF$PTL_LENGTH~myDF$SPECIES, xlab='Species',ylab='Petal Length (in)')
 
 ```
 
+**Histogram of Petal Length Values**
 
+```{r hist}
+hist(myDF$PTL_LENGTH)
+```
+
+**Quantile Plot of Petal Length Values Colored by Species**
+
+```{r q}
+qqnorm(myDF$PTL_LENGTH,col=myDF$SPECIES)
+
+```
+
+
+<hr>
 # Exercises
 
 ## Old Faithful Geyser Data
 
-Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use `help(faithful)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below.
+Perform the following exercises with the Old Faitful data set in your Lesson 1 script so you have the code for reference. Use `help(faithful)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.
 
 1. Load the `faithful` data set and assign it to an object called `faithful`. Use `head()` to check the object.
 
@@ -238,13 +277,15 @@ summary(faithful)
 
 </div>
 
-4. Plot waiting time on the x axis and eruptions on the y axis using the `plot()` function.
+4. Make a linear model and scatterplot of waiting time on the x axis and eruptions on the y axis using the `plot()` and `lm()` and `abline()` functions. Is there a relationship between wait time and the length of eruption?
 
 <div class="fold s o">
 
 ```{r faithful4}
-
+mdl<-lm(faithful$eruptions~faithful$waiting)
+summary(mdl)
 plot(faithful$eruptions~faithful$waiting)
+abline(mdl)
 
 ```
 
@@ -253,6 +294,60 @@ plot(faithful$eruptions~faithful$waiting)
 
 
 ## Motor Trend Cars Data Set
+Perform the following exercises with the Motor Trend `mtcars` data set in your Lesson 1 script so you have the code for reference. Use `?(mtcars)` in the console to bring up info about the data set. You can reveal the code and results with the buttons below, but try without the hints first.
+
+1. Load the `cars` data set and assign it to an object called `cars`.
+
+<div class="fold s o">
+
+```{r cars1}
+cars<-mtcars
+head(cars,10)
+```
+
+</div>
+
+2. Select out just the variables `mpg` and `wt` and assign it to a new data frame called `carsMPG` 
+
+<div class="fold s o">
+
+```{r cars2}
+names(cars)
+carsMPG<-cars[,c(1,6)]
+head(carsMPG)
+
+```
+
+
+</div>
+
+3. Make a linear model and scatterplot with best-fit line of the `carsMPG` data frame of weight on the x axis and miles per gallon on the y axis. Is there a relationship between weight and mpg?
+
+<div class="fold s o">
+
+```{r cars3}
+mdl<-lm(carsMPG$mpg~carsMPG$wt)
+summary(mdl)
+plot(carsMPG$mpg~carsMPG$wt)
+abline(mdl)
+
+```
+
+
+</div>
+
+
+4. Make a summary table from `cars` of miles per gallon and number of cylinders. Use the `table()` function.
+
+<div class="fold s o">
+
+```{r cars4}
+table(cars$gear,cars$cyl)
+
+```
+
+
+</div>
 
 
 <script src="js/hideOutput.js"></script>
