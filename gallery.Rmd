@@ -91,7 +91,9 @@ ggMarginal(g, type = "boxplot", fill="transparent")
 
 ```
   
+
 <h3>Slope Chart</h3>
+
   
 ```{r slp}
   
