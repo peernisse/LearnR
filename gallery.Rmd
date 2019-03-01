@@ -8,7 +8,7 @@ output:
 ---
 
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-4">
   <h1>Online Articles</h1>
   <h3> How the BBC Visual and Data Journalism team works with graphics in R </h3>
 
@@ -30,14 +30,10 @@ output:
   </div>
   
   
+  <div class="col-md-7 col-md-offset-1">
+  <h1>`ggplot2` Examples</h1>
+  <div class="row scry">
   
-
-  
-  
-  
-  <div class="col-md-6">
-  
-  <h1>ggplot2 Examples</h1>
   
   <h3>Scatter Plot with `midwest` Data Set (ggplot2)</h3>
   
@@ -177,6 +173,14 @@ plot(gg)
 ```
   
   
+  </div>
+  
+  <div class="row">
+  <h1>Flex Dashboards with `shiny` and `plotly`</h1>
+  
+  https://bookdown.org/csgillespie/shiny_components/#htmlwidget-and-value-boxes
+  
+  </div>
   
   </div>
 
