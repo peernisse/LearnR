@@ -396,6 +396,9 @@ div.tocify {
   <a href="resources.html">Resources</a>
 </li>
 <li>
+  <a href="gallery.html">Gallery</a>
+</li>
+<li>
   <a href="about.html">About</a>
 </li>
       </ul>
@@ -658,9 +661,9 @@ summary(mdl)</code></pre>
 ## -1.5561 -0.6333 -0.1120  0.5579  2.2226 
 ## 
 ## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)     6.5262     0.4789   13.63   &lt;2e-16 ***
-## myDF$SP_WIDTH  -0.2234     0.1551   -1.44    0.152    
+##               Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)     6.5262     0.4789   13.63 &lt;0.0000000000000002 ***
+## myDF$SP_WIDTH  -0.2234     0.1551   -1.44               0.152    
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
@@ -741,15 +744,15 @@ summary(mdl)</code></pre>
 ## -1.29917 -0.37689  0.03508  0.34909  1.19329 
 ## 
 ## Coefficients:
-##                   Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)      -1.874016   0.160143  -11.70   &lt;2e-16 ***
-## faithful$waiting  0.075628   0.002219   34.09   &lt;2e-16 ***
+##                   Estimate Std. Error t value            Pr(&gt;|t|)    
+## (Intercept)      -1.874016   0.160143  -11.70 &lt;0.0000000000000002 ***
+## faithful$waiting  0.075628   0.002219   34.09 &lt;0.0000000000000002 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.4965 on 270 degrees of freedom
 ## Multiple R-squared:  0.8115, Adjusted R-squared:  0.8108 
-## F-statistic:  1162 on 1 and 270 DF,  p-value: &lt; 2.2e-16</code></pre>
+## F-statistic:  1162 on 1 and 270 DF,  p-value: &lt; 0.00000000000000022</code></pre>
 <pre class="r"><code>plot(faithful$eruptions~faithful$waiting)
 abline(mdl)</code></pre>
 <p><img src="lesson1_files/figure-html/faithful4-1.png" width="672" /></p>
@@ -774,18 +777,7 @@ head(cars,10)</code></pre>
 ## Duster 360        14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
 ## Merc 240D         24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
 ## Merc 230          22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
-## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
-##                                 Car
-## Mazda RX4                 Mazda RX4
-## Mazda RX4 Wag         Mazda RX4 Wag
-## Datsun 710               Datsun 710
-## Hornet 4 Drive       Hornet 4 Drive
-## Hornet Sportabout Hornet Sportabout
-## Valiant                     Valiant
-## Duster 360               Duster 360
-## Merc 240D                 Merc 240D
-## Merc 230                   Merc 230
-## Merc 280                   Merc 280</code></pre>
+## Merc 280          19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4</code></pre>
 </div>
 <ol start="2" style="list-style-type: decimal">
 <li>Select out just the variables <code>mpg</code> and <code>wt</code> and assign it to a new data frame called <code>carsMPG</code></li>
@@ -793,7 +785,7 @@ head(cars,10)</code></pre>
 <div class="fold s o">
 <pre class="r"><code>names(cars)</code></pre>
 <pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
-## [11] &quot;carb&quot; &quot;Car&quot;</code></pre>
+## [11] &quot;carb&quot;</code></pre>
 <pre class="r"><code>carsMPG&lt;-cars[,c(1,6)]
 head(carsMPG)</code></pre>
 <pre><code>##                    mpg    wt
@@ -819,15 +811,15 @@ summary(mdl)</code></pre>
 ## -4.5432 -2.3647 -0.1252  1.4096  6.8727 
 ## 
 ## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  37.2851     1.8776  19.858  &lt; 2e-16 ***
-## carsMPG$wt   -5.3445     0.5591  -9.559 1.29e-10 ***
+##             Estimate Std. Error t value             Pr(&gt;|t|)    
+## (Intercept)  37.2851     1.8776  19.858 &lt; 0.0000000000000002 ***
+## carsMPG$wt   -5.3445     0.5591  -9.559       0.000000000129 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 3.046 on 30 degrees of freedom
 ## Multiple R-squared:  0.7528, Adjusted R-squared:  0.7446 
-## F-statistic: 91.38 on 1 and 30 DF,  p-value: 1.294e-10</code></pre>
+## F-statistic: 91.38 on 1 and 30 DF,  p-value: 0.0000000001294</code></pre>
 <pre class="r"><code>plot(carsMPG$mpg~carsMPG$wt)
 abline(mdl)</code></pre>
 <p><img src="lesson1_files/figure-html/cars3-1.png" width="672" /></p>
