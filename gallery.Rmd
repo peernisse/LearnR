@@ -7,9 +7,15 @@ output:
 
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
+```
+
 <div class="row">
   <div class="col-md-4">
   <h1>Online Articles</h1>
+  
+  <hr>
   <h3> How the BBC Visual and Data Journalism team works with graphics in R </h3>
 
   <a href="https://medium.com/bbc-visual-and-data-journalism/how-the-bbc-visual-and-data-journalism-team-works-with-graphics-in-r-ed0b35693535">
@@ -17,10 +23,10 @@ output:
   <img src="./img/0_DDRU1L5LIJkgDBxd.png" >
   
   </a>
-
+<hr>
   <h3>Why The R Programming Language Is Good For Business</h3>
   https://www.fastcompany.com/3030063/why-the-r-programming-language-is-good-for-business
-  
+  <hr>
   <h3>R vs Python for Data Science: The Winner is </h3>
   <a href="https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html">
   
@@ -31,7 +37,9 @@ output:
   
   
   <div class="col-md-7 col-md-offset-1">
-  <h1>`ggplot2` Examples</h1>
+  <h1>Motivation</h1>
+  <hr>
+  <h3>`ggplot2` Examples</h1>
   <div class="row scry">
   
   
@@ -86,11 +94,9 @@ ggMarginal(g, type = "boxplot", fill="transparent")
 
 
 ```
-  
-
+ 
 <h3>Slope Chart</h3>
 
-  
 ```{r slp}
   
 library(ggplot2)
@@ -129,8 +135,7 @@ p + theme(panel.background = element_blank(),
   
   
 ```
-  
-  
+ 
   <h3>Dumbell Chart</h3>
   
 ```{r dc}
@@ -171,15 +176,16 @@ plot(gg)
 
 
 ```
-  
-  
+ 
   </div>
   
   <div class="row">
-  <h1>Flex Dashboards with `shiny` and `plotly`</h1>
-  
-  https://bookdown.org/csgillespie/shiny_components/#htmlwidget-and-value-boxes
-  
+  <hr>
+  <h3>Flex Dashboards with `shiny` and `plotly`</h3>
+  <a href="https://bookdown.org/csgillespie/shiny_components/#htmlwidget-and-value-boxes">
+  <img src="./img/dash1.png">
+  </a>
+
   </div>
   
   </div>

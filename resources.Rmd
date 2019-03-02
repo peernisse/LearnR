@@ -3,11 +3,14 @@ title: "R Resources"
 ---
 
 This page has links to lots of great R learning resources. You put in the time, you will be crushing it with R in no time!
-
 <hr>
-# Tutorials
+<div class="row">
+<div class="col-sm-6">
 
-https://www.rforcats.net/
+<h1>Tutorials</h1>
+<hr>
+
+https://www.rforcats.net
 
 In R console type `help.start()`
 
@@ -20,10 +23,62 @@ Just use Google!
 
 
 <hr>
-# SWIRL
+<h1>SWIRL</h1>
 
 The swirl() package has lots of hands on lessons that run right in your IDE.
 `install.packages("swirl")`
-Then fire it up and start practicing.
+Then fire it up and start practicing `library(swirl)` and `swirl()`.
+
+</div>
+
+<div class="col-sm-6">
+<h1>R Blogs</h1>
+<hr>
+<p style="font-size: 30px; padding-top:30px;">Hadley Wickham</p>
+<a href="http://hadley.nz">
+<img src="./img/hadley-wickham.jpg">
+</a>
+
+<hr>
+  <a href="https://www.r-bloggers.com">
+  <img src="./img/rblog.png" title="R-Bloggers is about empowering bloggers to empower other R users.">
+  <a/>
+  
+  
+<hr>
+<div class="row">
+ <div class="col-sm-3">
+  <a href="https://yihui.name/en">
+   <img src="./img/yihui.png" title="Yihui Xie is a software engineer at RStudio. As an active R user, he has authored several R packages, such as knitr, bookdown, blogdown, xaringan, animation, DT, tinytex, tufte, formatR, fun, mime, highr, servr, Rd2roxygen and much more.">
+  </a>
+</div>
+
+<div class="col-sm-9">
+ <p style="font-size: 40px; padding-top:30px;">Yihui's Blog!</p>
+</div>
+
+</div>
+<hr>
+  <p style="font-size: 30px; padding-top:30px;">Roger Peng</p>
+  
+  <a href="http://www.biostat.jhsph.edu/~rpeng">
+  <img src="./img/peng.png">
+  </a>
+<hr>
+<p style="font-size: 30px; padding-top:30px;">Hillary Parker</p>
+<a href="https://hilaryparker.com">
+<img src="./img/hillary.jpg">
+</a>
+<hr>
+<p style="font-size: 40px; padding-top:30px;">Shirin's Blog</p>
+<a href="https://shirinsplayground.netlify.com/page/about/">
+<img src="./img/shirin.png" title="I’m Shirin, a biologist turned bioinformatician turned data scientist. During my PhD and Postdoc I worked with Next Generation Sequencing data to analyze diseases like arthritis. However, I then chose to become a data scientist for a German IT company, called codecentric...">
+</a>
+
+
+</div>
+
+
+</div>
 
 

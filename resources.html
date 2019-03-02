@@ -97,9 +97,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -114,6 +111,7 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
+
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -133,43 +131,6 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -191,77 +152,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -314,20 +216,64 @@ $(document).ready(function () {
 </div>
 
 
-<p>This page has links to lots of great R learning resources. You put in the time, you will be crushing it with R in no time!</p>
+This page has links to lots of great R learning resources. You put in the time, you will be crushing it with R in no time!
 <hr>
-<div id="tutorials" class="section level1">
-<h1>Tutorials</h1>
-<p><a href="https://www.rforcats.net/" class="uri">https://www.rforcats.net/</a></p>
+<div class="row">
+<div class="col-sm-6">
+
+<h1>
+Tutorials
+</h1>
+<hr>
+<p><a href="https://www.rforcats.net" class="uri">https://www.rforcats.net</a></p>
 <p>In R console type <code>help.start()</code></p>
 <p><a href="http://cran.r-project.org/doc/manuals/r-release/R-intro.html" class="uri">http://cran.r-project.org/doc/manuals/r-release/R-intro.html</a></p>
 <p><a href="https://www.datacamp.com/courses/free-introduction-to-r" class="uri">https://www.datacamp.com/courses/free-introduction-to-r</a></p>
 <p>Just use Google!</p>
 <hr>
+<h1>
+SWIRL
+</h1>
+<p>The swirl() package has lots of hands on lessons that run right in your IDE. <code>install.packages(&quot;swirl&quot;)</code> Then fire it up and start practicing <code>library(swirl)</code> and <code>swirl()</code>.</p>
 </div>
-<div id="swirl" class="section level1">
-<h1>SWIRL</h1>
-<p>The swirl() package has lots of hands on lessons that run right in your IDE. <code>install.packages(&quot;swirl&quot;)</code> Then fire it up and start practicing.</p>
+<div class="col-sm-6">
+<h1>
+R Blogs
+</h1>
+<hr>
+<p style="font-size: 30px; padding-top:30px;">
+Hadley Wickham
+</p>
+<p><a href="http://hadley.nz"> <img src="img/hadley-wickham.jpg"> </a></p>
+<hr>
+<p><a href="https://www.r-bloggers.com"> <img src="img/rblog.png" title="R-Bloggers is about empowering bloggers to empower other R users."> <a/></p>
+<hr>
+<div class="row">
+<div class="col-sm-3">
+<p><a href="https://yihui.name/en"> <img src="img/yihui.png" title="Yihui Xie is a software engineer at RStudio. As an active R user, he has authored several R packages, such as knitr, bookdown, blogdown, xaringan, animation, DT, tinytex, tufte, formatR, fun, mime, highr, servr, Rd2roxygen and much more."> </a></p>
+</div>
+<div class="col-sm-9">
+<p style="font-size: 40px; padding-top:30px;">
+Yihui’s Blog!
+</p>
+</div>
+</div>
+<hr>
+<p style="font-size: 30px; padding-top:30px;">
+Roger Peng
+</p>
+<a href="http://www.biostat.jhsph.edu/~rpeng"> <img src="img/peng.png"> </a>
+<hr>
+<p style="font-size: 30px; padding-top:30px;">
+Hillary Parker
+</p>
+<a href="https://hilaryparker.com"> <img src="img/hillary.jpg"> </a>
+<hr>
+<p style="font-size: 40px; padding-top:30px;">
+Shirin’s Blog
+</p>
+<p><a href="https://shirinsplayground.netlify.com/page/about/"> <img src="img/shirin.png" title="Iâ€™m Shirin, a biologist turned bioinformatician turned data scientist. During my PhD and Postdoc I worked with Next Generation Sequencing data to analyze diseases like arthritis. However, I then chose to become a data scientist for a German IT company, called codecentric..."> </a></p>
+</div>
 </div>
 
 
