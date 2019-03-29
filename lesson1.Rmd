@@ -20,7 +20,7 @@ knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE
 Let's get R Studio up and running and discuss some of its features. Launch R Studio on your machine.
 
 ## R Studio - Your Favorite R IDE
-The image below should look close to what you have when you launch R Studio. The `Console` command line is on the left, the `Environment` windows upper left and the `Navigator and Preview` tabs in lower right. This configuration can be modified later.
+The image below should look close to what you have when you launch R Studio. The `Console` command line is on the left, the `Environment` windows upper right and the `Navigator and Preview` tabs in lower right. This configuration can be modified later.
 
 If you like the dark theme, you can set it by going to `Tools` > `Global Options` > `Appearance` > and set `Theme` to `Modern`. 
 
@@ -105,20 +105,26 @@ v1/v2
 
 ### Lists
 
-Create a list and explore its features.
+A list is an object in memory that can hold any kind of other objects. A list can hold a seris of other lists, vectors or even data frames. We will look at lists in another lesson.
 
-* Select certain objects from the list
-
-### Data Frames
-
-Create a data frame and explore its features
-
-* Check data frame dimensions
-* Check column names
 
 ### Factors
 
-Understand what a factor is, and when to use it or not use it.
+A factor, in R, is a character string with a level of meta data which represents the `levels`, or order, of the objects. Vectors can be difficult, but they are useful for presenting things in tables and plots in a specific order.
+
+```{r factor}
+myFactor<-factor(c('A','B','C'),levels = c('C','B','A'))
+myFactor
+sort(myFactor)
+
+```
+
+
+### Data Frames
+
+Data frames are likely the most-used object type for the kind of work we do. You can think of a data frame as a spreadsheet with column titles and data of different types (e.g., text, date, numeric).
+
+We will be using data frames in the examples below.
 
 ## R Data Sets
 R and R packages have built-in data sets for practicing and developing your R code. We will explore the `iris` data set and see some examples of data manipulation.
