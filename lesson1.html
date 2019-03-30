@@ -100,6 +100,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -114,7 +117,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -134,6 +136,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -155,18 +194,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -326,7 +424,7 @@ div.tocify {
 <p>Let’s get R Studio up and running and discuss some of its features. Launch R Studio on your machine.</p>
 <div id="r-studio---your-favorite-r-ide" class="section level2">
 <h2>R Studio - Your Favorite R IDE</h2>
-<p>The image below should look close to what you have when you launch R Studio. The <code>Console</code> command line is on the left, the <code>Environment</code> windows upper left and the <code>Navigator and Preview</code> tabs in lower right. This configuration can be modified later.</p>
+<p>The image below should look close to what you have when you launch R Studio. The <code>Console</code> command line is on the left, the <code>Environment</code> windows upper right and the <code>Navigator and Preview</code> tabs in lower right. This configuration can be modified later.</p>
 <p>If you like the dark theme, you can set it by going to <code>Tools</code> &gt; <code>Global Options</code> &gt; <code>Appearance</code> &gt; and set <code>Theme</code> to <code>Modern</code>.</p>
 <div class="figure">
 <img src="img/rstudio1.JPG" />
@@ -407,22 +505,23 @@ v1*v2</code></pre>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
-<p>Create a list and explore its features.</p>
-<ul>
-<li>Select certain objects from the list</li>
-</ul>
-</div>
-<div id="data-frames" class="section level3">
-<h3>Data Frames</h3>
-<p>Create a data frame and explore its features</p>
-<ul>
-<li>Check data frame dimensions</li>
-<li>Check column names</li>
-</ul>
+<p>A list is an object in memory that can hold any kind of other objects. A list can hold a seris of other lists, vectors or even data frames. We will look at lists in another lesson.</p>
 </div>
 <div id="factors" class="section level3">
 <h3>Factors</h3>
-<p>Understand what a factor is, and when to use it or not use it.</p>
+<p>A factor, in R, is a character string with a level of meta data which represents the <code>levels</code>, or order, of the objects. Vectors can be difficult, but they are useful for presenting things in tables and plots in a specific order.</p>
+<pre class="r"><code>myFactor&lt;-factor(c(&#39;A&#39;,&#39;B&#39;,&#39;C&#39;),levels = c(&#39;C&#39;,&#39;B&#39;,&#39;A&#39;))
+myFactor</code></pre>
+<pre><code>## [1] A B C
+## Levels: C B A</code></pre>
+<pre class="r"><code>sort(myFactor)</code></pre>
+<pre><code>## [1] C B A
+## Levels: C B A</code></pre>
+</div>
+<div id="data-frames" class="section level3">
+<h3>Data Frames</h3>
+<p>Data frames are likely the most-used object type for the kind of work we do. You can think of a data frame as a spreadsheet with column titles and data of different types (e.g., text, date, numeric).</p>
+<p>We will be using data frames in the examples below.</p>
 </div>
 </div>
 <div id="r-data-sets" class="section level2">
