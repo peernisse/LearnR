@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE
 
 <div class="row">
   <div class="col-md-4">
-  <h1>Online Articles</h1>
+  <h1>Articles</h1>
   
   <hr>
   <h3> How the BBC Visual and Data Journalism team works with graphics in R </h3>
