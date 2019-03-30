@@ -1,0 +1,49 @@
+---
+title: "Lesson 2 - Data Sources, Data Wrangling, ggplot2"
+output: 
+        html_document:
+          #code_folding: show
+          toc: true
+          toc_float: 
+                collapsed: false
+                smooth_scroll: true
+                toc_depth: 3
+          number_sections: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
+```
+
+<hr>
+# Getting Data into R
+
+## Common Data Sources
+
+* CSV file
+* Tab delimited file
+* Excel file
+* Download a file from the internet
+* Read a file from the internet
+* Web APIs
+* Scrape webpages
+
+### Import from file
+
+### Download File
+
+`download.file()`
+
+<hr>
+# Inevitible Data Wrangling
+
+## Intoduction to dplyr
+
+* Inconsistent spelling
+* Wrong format
+
+<hr>
+# Basic ggplot2 Plotting
+
+<hr>
+# Exercises
