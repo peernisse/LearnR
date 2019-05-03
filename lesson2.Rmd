@@ -16,6 +16,40 @@ knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE
 ```
 
 <hr>
+# R Packages
+A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package 'xlsx' which contains functions for use in working with Excel files from R.
+
+```
+install.packages('xlsx')
+    
+```
+The package installs from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.
+
+## Install Packages for this Class
+Packages just need to be installed once on your machine, however, many packages are frequently updated.
+
+Let's install the following packages for use in this class:
+```
+install.packages('dplyr') #This is a group of very powerful data wrangling functions.
+
+install.packages('data.table') #Another popular and very powerful data wrangling package, popular with people processing large amounts of data.
+
+install.packages('ggplot2) #A VERY popular visualization and plotting package.
+
+
+```
+## Loading Packages to Local Memory
+
+`library(dplyr)`
+`library(ggplot2)`
+`library(data.table)`
+
+
+
+### See where you packages are:
+`.libPaths()`
+
+
 # Getting Data into R
 
 ## Common Data Sources
@@ -28,9 +62,11 @@ knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE
 * Web APIs
 * Scrape webpages
 
+### Download File
+
 ### Import from file
 
-### Download File
+
 
 `download.file()`
 

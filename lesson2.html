@@ -324,6 +324,33 @@ div.tocify {
 
 
 <hr>
+<div id="r-packages" class="section level1">
+<h1>R Packages</h1>
+<p>A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package ‘xlsx’ which contains functions for use in working with Excel files from R.</p>
+<pre><code>install.packages(&#39;xlsx&#39;)
+    </code></pre>
+<p>The package installs from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.</p>
+<div id="install-packages-for-this-class" class="section level2">
+<h2>Install Packages for this Class</h2>
+<p>Packages just need to be installed once on your machine, however, many packages are frequently updated.</p>
+<p>Let’s install the following packages for use in this class:</p>
+<pre><code>install.packages(&#39;dplyr&#39;) #This is a group of very powerful data wrangling functions.
+
+install.packages(&#39;data.table&#39;) #Another popular and very powerful data wrangling package, popular with people processing large amounts of data.
+
+install.packages(&#39;ggplot2) #A VERY popular visualization and plotting package.
+
+</code></pre>
+</div>
+<div id="loading-packages-to-local-memory" class="section level2">
+<h2>Loading Packages to Local Memory</h2>
+<p><code>library(dplyr)</code> <code>library(ggplot2)</code> <code>library(data.table)</code></p>
+<div id="see-where-you-packages-are" class="section level3">
+<h3>See where you packages are:</h3>
+<p><code>.libPaths()</code></p>
+</div>
+</div>
+</div>
 <div id="getting-data-into-r" class="section level1">
 <h1>Getting Data into R</h1>
 <div id="common-data-sources" class="section level2">
@@ -337,11 +364,11 @@ div.tocify {
 <li>Web APIs</li>
 <li>Scrape webpages</li>
 </ul>
-<div id="import-from-file" class="section level3">
-<h3>Import from file</h3>
-</div>
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
+</div>
+<div id="import-from-file" class="section level3">
+<h3>Import from file</h3>
 <p><code>download.file()</code></p>
 <hr>
 </div>
