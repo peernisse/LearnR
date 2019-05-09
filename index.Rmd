@@ -45,9 +45,9 @@ Then, configure your username an email. This can also be changed later if you ar
 
 `Open GitBash command line from the Start menu and enter the following commands`
 
-`git config --global --user.name "the name you want to have GIT record you as"`
+`git config --global --user name "the name you want to have GIT record you as"`
 
-`git config --global --user.email "your email"`
+`git config --global --user email "your email"`
 
 
 

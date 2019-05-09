@@ -11,7 +11,7 @@
 
 
 
-<title>Schedule</title>
+<title>Lesson 2 - Data Sources, Data Wrangling, ggplot2</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -19,6 +19,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -265,6 +268,107 @@ $(document).ready(function () {
 
 
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -312,56 +416,85 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Schedule</h1>
+<h1 class="title toc-ignore">Lesson 2 - Data Sources, Data Wrangling, ggplot2</h1>
 
 </div>
 
 
-<p>This schedule is tentative and may change as we go along.</p>
-<table>
-<colgroup>
-<col width="35%" />
-<col width="15%" />
-<col width="49%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Lesson</th>
-<th>Date</th>
-<th>Topics</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Lesson 1 - Setting up the IDE and Basic R Overview</td>
-<td>March 29, 2019</td>
-<td>RStudio, basic R commands, object types</td>
-</tr>
-<tr class="even">
-<td>Lesson 2 - Data Sources, Data Wrangling</td>
-<td>April 12, 2019</td>
-<td>Getting and Cleaning Data, Data Wrangling 1,ggplot2 1,object export</td>
-</tr>
-<tr class="odd">
-<td>Lesson 3 - Data wrangling 2</td>
-<td>April 26, 2019</td>
-<td>Advanced Data wrangling, More plotting with ggplot2, plotting in loop</td>
-</tr>
-<tr class="even">
-<td>Lesson 4 - Modeling</td>
-<td>April 5, 2019</td>
-<td>Model methods.</td>
-</tr>
-<tr class="odd">
-<td>TBD</td>
-<td>May 12, 2019</td>
-<td>TBD</td>
-</tr>
-</tbody>
-</table>
+<hr>
+<div id="r-packages" class="section level1">
+<h1>R Packages</h1>
+<p>A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package ‘xlsx’ which contains functions for use in working with Excel files from R.</p>
+<pre><code>install.packages(&#39;xlsx&#39;)
+    </code></pre>
+<p>The package installs from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.</p>
+<div id="install-packages-for-this-class" class="section level2">
+<h2>Install Packages for this Class</h2>
+<p>Packages just need to be installed once on your machine, however, many packages are frequently updated.</p>
+<p>Let’s install the following packages for use in this class:</p>
+<pre><code>install.packages(&#39;dplyr&#39;) #This is a group of very powerful data wrangling functions.
+
+install.packages(&#39;data.table&#39;) #Another popular and very powerful data wrangling package, popular with people processing large amounts of data.
+
+install.packages(&#39;ggplot2) #A VERY popular visualization and plotting package.
+
+</code></pre>
+</div>
+<div id="loading-packages-to-local-memory" class="section level2">
+<h2>Loading Packages to Local Memory</h2>
+<p><code>library(dplyr)</code> <code>library(ggplot2)</code> <code>library(data.table)</code></p>
+<div id="see-where-you-packages-are" class="section level3">
+<h3>See where you packages are:</h3>
+<p><code>.libPaths()</code></p>
+</div>
+</div>
+</div>
+<div id="getting-data-into-r" class="section level1">
+<h1>Getting Data into R</h1>
+<div id="common-data-sources" class="section level2">
+<h2>Common Data Sources</h2>
+<ul>
+<li>CSV file</li>
+<li>Tab delimited file</li>
+<li>Excel file</li>
+<li>Download a file from the internet</li>
+<li>Read a file from the internet</li>
+<li>Web APIs</li>
+<li>Scrape webpages</li>
+</ul>
+<div id="download-file" class="section level3">
+<h3>Download File</h3>
+</div>
+<div id="import-from-file" class="section level3">
+<h3>Import from file</h3>
+<p><code>download.file()</code></p>
+<hr>
+</div>
+</div>
+</div>
+<div id="inevitible-data-wrangling" class="section level1">
+<h1>Inevitible Data Wrangling</h1>
+<div id="intoduction-to-dplyr" class="section level2">
+<h2>Intoduction to dplyr</h2>
+<ul>
+<li>Inconsistent spelling</li>
+<li>Wrong format</li>
+</ul>
+<hr>
+</div>
+</div>
+<div id="basic-ggplot2-plotting" class="section level1">
+<h1>Basic ggplot2 Plotting</h1>
+<hr>
+</div>
+<div id="exercises" class="section level1">
+<h1>Exercises</h1>
+</div>
 
 
 
+</div>
+</div>
 
 </div>
 
