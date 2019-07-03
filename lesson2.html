@@ -464,23 +464,62 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 </ul>
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
+<p><code>download.file()</code></p>
+<p>Download the long format file <code>lesson2Data1.xlsx</code></p>
+<pre class="r"><code>download.file(&#39;https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/lesson2Data1.csv&#39;, destfile = &#39;./data/lesson2Data1.csv&#39;,mode = &#39;wb&#39;)</code></pre>
+<p>Download the wide format file <code>wideData.csv</code></p>
+<pre class="r"><code>download.file(&#39;https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/wideData.csv&#39;, destfile = &#39;./data/wideData.csv&#39;,mode = &#39;wb&#39;)</code></pre>
 </div>
 <div id="import-from-file" class="section level3">
 <h3>Import from file</h3>
-<p><code>download.file()</code></p>
+<p>Read these data files into local memory so we can do stuff with the data.</p>
+<div id="reading-from-csv" class="section level4">
+<h4>Reading from CSV</h4>
+<pre class="r"><code>#Read csv file
+longData&lt;-read.csv(&#39;./data/lesson2Data1.csv&#39;, stringsAsFactors = FALSE)</code></pre>
+<pre class="r"><code>#Read csv file
+wideData&lt;-read.csv(&#39;./data/wideData.csv&#39;, stringsAsFactors = FALSE,header = FALSE)</code></pre>
+</div>
+<div id="reading-from-excel-.xlsx" class="section level4">
+<h4>Reading from Excel .xlsx</h4>
 <hr>
+</div>
 </div>
 </div>
 </div>
 <div id="inevitible-data-wrangling" class="section level1">
 <h1>Inevitible Data Wrangling</h1>
+<p>Filtering, selecting and arranging the data is all part of setting up for your analysis. The <code>dplyr</code> package provides a powerful set of functions for data manipulation. Also see <code>data.table</code>. Here, we will focus on <code>dplyr</code>.</p>
 <div id="intoduction-to-dplyr" class="section level2">
 <h2>Intoduction to dplyr</h2>
+<p>We have two datasets in memory right now, one in long format and one in wide format.</p>
+<p><code>What the what is Peter talking about right now?</code></p>
+<div id="long-format-data" class="section level3">
+<h3>Long Format Data</h3>
+<p>This format is most useful for computerized statistical analysis, database data storage, and for analytical plotting.</p>
+<pre class="r"><code>lf&lt;-longData %&gt;% select(LOC_ID, EASTING,NORTHING,SAMP_DATE,CHEM_CODE,RESULT,UNITS) %&gt;% .[1:10,]
+lf</code></pre>
+<pre><code>##    LOC_ID EASTING NORTHING SAMP_DATE CHEM_CODE RESULT UNITS
+## 1    CC-1 1654951 436022.6 31-Oct-10      ALKC    0.0  MG/L
+## 2    CC-1 1654951 436022.6 31-Oct-10      ALKB   15.9  MG/L
+## 3    CC-1 1654951 436022.6 31-Oct-10      ALKH    0.0  MG/L
+## 4   RC-16 1655221 436795.0 31-Oct-10       ALK   10.7  MG/L
+## 5   RC-16 1655221 436795.0 31-Oct-10      ALKC    0.0  MG/L
+## 6   RC-16 1655221 436795.0 31-Oct-10      ALKB   10.7  MG/L
+## 7   RC-16 1655221 436795.0 31-Oct-10      ALKH    0.0  MG/L
+## 8    CC-2 1655241 436735.0 31-Oct-10       ALK   12.9  MG/L
+## 9    CC-2 1655241 436735.0 31-Oct-10      ALKC    0.0  MG/L
+## 10   CC-2 1655241 436735.0 31-Oct-10      ALKB   12.9  MG/L</code></pre>
+</div>
+<div id="wide-format-data" class="section level3">
+<h3>Wide Format Data</h3>
+<p>This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator.</p>
 <ul>
 <li>Inconsistent spelling</li>
 <li>Wrong format</li>
 </ul>
 <hr>
+</div>
 </div>
 </div>
 <div id="basic-ggplot2-plotting" class="section level1">

@@ -15,6 +15,13 @@ output:
 knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
 ```
 
+```{r libs, include = FALSE}
+library(tidyverse)
+library(xlsx)
+
+```
+
+
 <hr>
 # R Packages
 A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package 'xlsx' which contains functions for use in working with Excel files from R.
@@ -64,16 +71,80 @@ install.packages('ggplot2) #A VERY popular visualization and plotting package.
 
 ### Download File
 
-### Import from file
-
-
-
 `download.file()`
+
+Download the long format file `lesson2Data1.xlsx`
+
+```{r long}
+download.file('https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/lesson2Data1.csv', destfile = './data/lesson2Data1.csv',mode = 'wb')
+```
+
+
+Download the wide format file `wideData.csv`
+
+```{r wide}
+
+download.file('https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/wideData.csv', destfile = './data/wideData.csv',mode = 'wb')
+
+
+```
+
+### Import from file
+Read these data files into local memory so we can do stuff with the data.
+
+#### Reading from CSV
+
+```{r import1}
+#Read csv file
+longData<-read.csv('./data/lesson2Data1.csv', stringsAsFactors = FALSE)
+
+
+```
+
+
+```{r import2}
+#Read csv file
+wideData<-read.csv('./data/wideData.csv', stringsAsFactors = FALSE,header = FALSE)
+
+
+```
+
+
+#### Reading from Excel .xlsx
+```{r xlsx}
+
+
+
+
+```
+
+
+
 
 <hr>
 # Inevitible Data Wrangling
+Filtering, selecting and arranging the data is all part of setting up for your analysis. The `dplyr` package provides a powerful set of functions for data manipulation. Also see `data.table`. Here, we will focus on `dplyr`.
 
 ## Intoduction to dplyr
+We have two datasets in memory right now, one in long format and one in wide format.
+
+`What the what is Peter talking about right now?`
+
+### Long Format Data
+This format is most useful for computerized statistical analysis, database data storage, and for analytical plotting.
+
+```{r lf}
+
+lf<-longData %>% select(LOC_ID, EASTING,NORTHING,SAMP_DATE,CHEM_CODE,RESULT,UNITS) %>% .[1:10,]
+lf
+
+
+
+```
+
+### Wide Format Data
+This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator.
+
 
 * Inconsistent spelling
 * Wrong format
