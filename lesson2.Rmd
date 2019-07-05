@@ -51,6 +51,7 @@ install.packages('ggplot2) #A VERY popular visualization and plotting package.
 
 
 # Getting Data into R
+There are lots of ways to import dta to local memory and start working with the data.
 
 ## Common Data Sources
 
@@ -63,12 +64,23 @@ install.packages('ggplot2) #A VERY popular visualization and plotting package.
 * Scrape webpages
 
 ### Download File
+`download.file(filepath)`
+Download the datafile from my github.
 
-### Import from file
+```{r df} 
 
+download.file('https://github.com/peernisse/LearnR/blob/master/lesson2Data.csv',destfile = './data/lesson2Data.csv',method='auto')
 
+```
 
-`download.file()`
+### Import from CSV
+
+```{r csv}
+
+data<-read.csv('./data/lesson2Data.csv')
+
+```
+
 
 <hr>
 # Inevitible Data Wrangling

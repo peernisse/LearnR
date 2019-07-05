@@ -100,9 +100,6 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
-summary {
-  display: list-item;
-}
 </style>
 
 
@@ -117,6 +114,7 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
+
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -136,43 +134,6 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
-}
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -194,77 +155,18 @@ $(document).ready(function () {
 });
 </script>
 
+
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
-  display: block;
-}
-
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
 </script>
 
 <!-- code folding -->
+
 
 
 
@@ -451,6 +353,10 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 </div>
 <div id="getting-data-into-r" class="section level1">
 <h1>Getting Data into R</h1>
+<p>There are lots of ways to import dta to local memory and start working with the data.</p>
+<div id="downloading-a-file" class="section level3">
+<h3>Downloading a File</h3>
+</div>
 <div id="common-data-sources" class="section level2">
 <h2>Common Data Sources</h2>
 <ul>
@@ -464,10 +370,12 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 </ul>
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
+<p><code>download.file(filepath)</code> Download the datafile from my github.</p>
+<pre class="r"><code>download.file(&#39;https://github.com/peernisse/LearnR/blob/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;)</code></pre>
 </div>
-<div id="import-from-file" class="section level3">
-<h3>Import from file</h3>
-<p><code>download.file()</code></p>
+<div id="import-from-csv" class="section level3">
+<h3>Import from CSV</h3>
+<pre class="r"><code>data&lt;-read.csv(&#39;./data/lesson2Data.csv&#39;)</code></pre>
 <hr>
 </div>
 </div>
