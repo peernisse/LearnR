@@ -354,9 +354,6 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 <div id="getting-data-into-r" class="section level1">
 <h1>Getting Data into R</h1>
 <p>There are lots of ways to import dta to local memory and start working with the data.</p>
-<div id="downloading-a-file" class="section level3">
-<h3>Downloading a File</h3>
-</div>
 <div id="common-data-sources" class="section level2">
 <h2>Common Data Sources</h2>
 <ul>
@@ -371,7 +368,7 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
 <p><code>download.file(filepath)</code> Download the datafile from my github.</p>
-<pre class="r"><code>download.file(&#39;https://github.com/peernisse/LearnR/blob/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;)</code></pre>
+<pre class="r"><code>download.file(&#39;https://github.com/peernisse/LearnR/blob/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;,method=&#39;auto&#39;)</code></pre>
 </div>
 <div id="import-from-csv" class="section level3">
 <h3>Import from CSV</h3>
