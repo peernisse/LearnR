@@ -326,10 +326,14 @@ div.tocify {
 <hr>
 <div id="r-packages" class="section level1">
 <h1>R Packages</h1>
-<p>A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package ‘xlsx’ which contains functions for use in working with Excel files from R.</p>
+<p>A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package ‘xlsx’ which contains functions for use in working with Excel files from R. Try installing these Excel interfacing packages, though some are dependent upon your current installation of JAVA.</p>
 <pre><code>install.packages(&#39;xlsx&#39;)
+install.packages(&#39;readxl&#39;)
+install.packages(&#39;openxlsx&#39;)
+install.packages(&#39;XLConnect&#39;)
     </code></pre>
-<p>The package installs from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.</p>
+<p>If you are getting an error installing some of these packages, request updated versions of 32- and 64-bit JAVA to be installed on your machine. Package <code>readxl</code> should not be problematic, however, as it does not have JAVA dependencies.</p>
+<p>Most R packages install from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can also be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.</p>
 <div id="install-packages-for-this-class" class="section level2">
 <h2>Install Packages for this Class</h2>
 <p>Packages just need to be installed once on your machine, however, many packages are frequently updated.</p>
@@ -344,52 +348,210 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 </div>
 <div id="loading-packages-to-local-memory" class="section level2">
 <h2>Loading Packages to Local Memory</h2>
+<p>THough packages need only be installed once on your machine, they need to be called into local memory before use in every R session.</p>
 <p><code>library(dplyr)</code> <code>library(ggplot2)</code> <code>library(data.table)</code></p>
-<div id="see-where-you-packages-are" class="section level3">
-<h3>See where you packages are:</h3>
+<p></br></p>
+<div id="see-what-is-loaded-in-the-current-session" class="section level3">
+<h3>See what is loaded in the current session:</h3>
+<p><code>sessionInfo()</code></p>
+<p></br></p>
+</div>
+<div id="see-where-your-packages-are" class="section level3">
+<h3>See where your packages are:</h3>
 <p><code>.libPaths()</code></p>
+<hr>
 </div>
 </div>
 </div>
 <div id="getting-data-into-r" class="section level1">
 <h1>Getting Data into R</h1>
-<p>There are lots of ways to import dta to local memory and start working with the data.</p>
+<p>There are lots of ways to import data to local memory and start working with the data, as there are ways to export your created objects.</p>
 <div id="common-data-sources" class="section level2">
 <h2>Common Data Sources</h2>
 <ul>
-<li>CSV file</li>
+<li><strong>CSV file</strong></li>
 <li>Tab delimited file</li>
 <li>Excel file</li>
-<li>Download a file from the internet</li>
+<li><strong>Download a file from the internet</strong></li>
 <li>Read a file from the internet</li>
+<li>SQL query from a database</li>
 <li>Web APIs</li>
 <li>Scrape webpages</li>
 </ul>
+<p></br></p>
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
 <p><code>download.file(filepath)</code> Download the datafile from my github.</p>
-<pre class="r"><code>download.file(&#39;https://github.com/peernisse/LearnR/blob/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;,method=&#39;auto&#39;)</code></pre>
+<pre class="r"><code>download.file(&#39;https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;,method=&#39;curl&#39;)</code></pre>
 </div>
 <div id="import-from-csv" class="section level3">
 <h3>Import from CSV</h3>
-<pre class="r"><code>data&lt;-read.csv(&#39;./data/lesson2Data.csv&#39;)</code></pre>
+<pre class="r"><code>data&lt;-read.csv(&#39;./data/lesson2Data.csv&#39;,stringsAsFactors = FALSE)</code></pre>
 <hr>
 </div>
 </div>
 </div>
 <div id="inevitible-data-wrangling" class="section level1">
 <h1>Inevitible Data Wrangling</h1>
+<p>The data we just downloaded are very clean, lucky us. But we will want to check the head, tail and dimensions briefly to see what we have here.</p>
+<pre class="r"><code>head(data)
+tail(data)
+dim(data)
+names(data)
+str(data)</code></pre>
+<p>Looks good. Let’s follow an example of calculating summary statistics on our data and creating a plot using <code>ggplot2</code> package. But first, as is always the case, we will need to massage the dataset before we do analyses.</p>
+<div id="date-formatting" class="section level2">
+<h2>Date Formatting</h2>
+<p>A common issue in data work is formatting of dates and times. Check the format of our date column <code>SAMP_DATE</code> using <code>class()</code> and the <code>$</code> operator.</p>
+<pre class="r"><code>class(data$SAMP_DATE)</code></pre>
+<pre><code>## [1] &quot;character&quot;</code></pre>
+<p>Our date column is a character class, meaning things would not sort by date and no hope of time series graphs, etc. THis happens commonly when reading data from a text file.</p>
+<p>The following code will be of great help in fixing this. We will create a new column in the data frame and it will hold correctly formatted dates.</p>
+<p><strong>Method 1</strong></p>
+<pre class="r"><code>data$DATE&lt;-as.Date(data$SAMP_DATE,format=&#39;%d-%b-%y&#39;)
+class(data$DATE)</code></pre>
+<pre><code>## [1] &quot;Date&quot;</code></pre>
+<p><strong>Method 2</strong></p>
+<pre class="r"><code>newdates&lt;-strptime(data$SAMP_DATE,format=&#39;%d-%b-%y&#39;)
+data$DATE&lt;-as.POSIXct(newdates)
+class(data$DATE)</code></pre>
+<pre><code>## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
+<p>Now our data will sort by date properly. But we are going to want to do some other data manipulation to simplify the dataset and then analyze it.</p>
+</div>
 <div id="intoduction-to-dplyr" class="section level2">
 <h2>Intoduction to dplyr</h2>
-<ul>
-<li>Inconsistent spelling</li>
-<li>Wrong format</li>
-</ul>
+<p>There are many means of wrangling data in R, <code>dplyr</code> is a popular library for doing this, as is <code>data.table</code>, and of course base R. We will be using <code>dplyr</code> in this lesson.</p>
+<pre class="r"><code>library(dplyr)</code></pre>
+<p></br></p>
+<div id="select-and-filter" class="section level3">
+<h3>Select and Filter</h3>
+<p>Let’s see what chemicals we have in the dataset, using <code>unique()</code>.</p>
+<pre class="r"><code>unique(data$CHEM_CODE)
+unique(data$LOC_ID)</code></pre>
+<p>Now, let’s grab just the columns we need, and then use filtering to zero in on just a few locations and chemicals. We will use <code>dplyr</code> functions <code>select</code> and <code>filter</code>.</p>
+<pre class="r"><code>#Create new dataframe to leave the original intact
+newdata&lt;-select(data,LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL)
+dim(newdata)</code></pre>
+<pre><code>## [1] 28517     7</code></pre>
+<pre class="r"><code>newdata&lt;-filter(newdata,LOC_ID %in% c(&#39;U8-056&#39;,&#39;U8-078&#39;),CHEM_CODE %in% c(&#39;FE&#39;,&#39;AS&#39;,&#39;MG&#39;))
+dim(newdata)</code></pre>
+<pre><code>## [1] 70  7</code></pre>
+<p></br></p>
+</div>
+<div id="summarize" class="section level3">
+<h3>Summarize</h3>
+<p>We can use the <code>dplyr</code> functions <code>group_by</code> and <code>summarize</code> to create a summary table.</p>
+<pre class="r"><code>#Create dtaframe containing a summary
+summary&lt;-group_by(newdata,CHEM_CODE,LOC_ID)
+summary&lt;-summarize(summary,
+                   MinDate=min(DATE),
+                   MaxDate=max(DATE),
+                   N=length(RESULT),
+                   Min=min(RESULT),
+                   Max=max(RESULT),
+                   Average=mean(RESULT),
+                   Stdev=sd(RESULT))
+summary</code></pre>
+<pre><code>## # A tibble: 6 x 9
+## # Groups:   CHEM_CODE [?]
+##   CHEM_CODE LOC_ID    MinDate    MaxDate     N     Min   Max    Average
+##       &lt;chr&gt;  &lt;chr&gt;     &lt;dttm&gt;     &lt;dttm&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+## 1        AS U8-056 1997-03-24 2005-10-13    16     0.0     3     0.1875
+## 2        AS U8-078 1999-03-25 2000-06-07     6    98.6   118   109.0333
+## 3        FE U8-056 1997-03-24 2005-10-13    17     0.0  3210   722.5412
+## 4        FE U8-078 1999-03-25 2000-06-07     7   897.0  1170  1009.8571
+## 5        MG U8-056 1997-03-24 2005-10-13    17 35600.0 49100 45247.0588
+## 6        MG U8-078 1999-03-25 2000-06-07     7 26400.0 28900 27900.0000
+## # ... with 1 more variables: Stdev &lt;dbl&gt;</code></pre>
+<p></br></p>
+</div>
+<div id="the-pipe-operator" class="section level3">
+<h3>The Pipe Operator ( %&gt;% )</h3>
+<p>In <code>dplyr</code> there is a very useful operator called the pipe, which removes the need to state your object as the first argument of a <code>dplyr</code> function, and chains the whole process together. It is an annoying character to type, so use the key shortcut for it which is <code>ctrl+shift+M</code>.</p>
+<pre class="r"><code>summary&lt;-data %&gt;% 
+  select(LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL) %&gt;% 
+  filter(LOC_ID %in% c(&#39;U8-056&#39;,&#39;U8-078&#39;),CHEM_CODE %in% c(&#39;FE&#39;,&#39;AS&#39;,&#39;MG&#39;)) %&gt;% 
+  group_by(CHEM_CODE,LOC_ID) %&gt;% 
+  summarize(MinDate=min(DATE),
+                   MaxDate=max(DATE),
+                   N=length(RESULT),
+                   Min=min(RESULT),
+                   Max=max(RESULT),
+                   Average=mean(RESULT),
+                   Stdev=sd(RESULT))
+summary</code></pre>
+<pre><code>## # A tibble: 6 x 9
+## # Groups:   CHEM_CODE [?]
+##   CHEM_CODE LOC_ID    MinDate    MaxDate     N     Min   Max    Average
+##       &lt;chr&gt;  &lt;chr&gt;     &lt;dttm&gt;     &lt;dttm&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
+## 1        AS U8-056 1997-03-24 2005-10-13    16     0.0     3     0.1875
+## 2        AS U8-078 1999-03-25 2000-06-07     6    98.6   118   109.0333
+## 3        FE U8-056 1997-03-24 2005-10-13    17     0.0  3210   722.5412
+## 4        FE U8-078 1999-03-25 2000-06-07     7   897.0  1170  1009.8571
+## 5        MG U8-056 1997-03-24 2005-10-13    17 35600.0 49100 45247.0588
+## 6        MG U8-078 1999-03-25 2000-06-07     7 26400.0 28900 27900.0000
+## # ... with 1 more variables: Stdev &lt;dbl&gt;</code></pre>
+<p></br></p>
+</div>
+<div id="mutate" class="section level3">
+<h3>Mutate</h3>
+<p>The <code>dplyr</code> function <code>mutate</code> is used to create or modify columns.</p>
+<p>In our data example, I would like the non-detected values currently recorded as zero to be replaced with one-half the method detection limit (MDL). We will create a new column <code>RESULT_ND</code> to hold this information, using the function <code>ifelse</code> to do the logic.</p>
+<pre class="r"><code>newdata&lt;-data %&gt;%
+  select(LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL) %&gt;% 
+  filter(LOC_ID %in% c(&#39;U8-056&#39;,&#39;U8-078&#39;),CHEM_CODE %in% c(&#39;FE&#39;,&#39;AS&#39;,&#39;MG&#39;)) %&gt;% 
+  mutate(RESULT_ND = ifelse(PAR_VQ==&#39;ND&#39;,0.5*MDL,RESULT))#ifelse reads 3 arguments the same as the IF function in Excel
+  
+head(newdata)</code></pre>
+<pre><code>##   LOC_ID       DATE CHEM_CODE RESULT UNITS PAR_VQ  MDL RESULT_ND
+## 1 U8-056 1999-08-23        FE    129  UG/L      = 24.2    129.00
+## 2 U8-056 1999-08-23        AS      0  UG/L     ND  3.3      1.65
+## 3 U8-056 1999-08-23        MG  42900  UG/L      = 37.0  42900.00
+## 4 U8-078 1999-08-23        AS    105  UG/L      =  3.3    105.00
+## 5 U8-078 1999-08-23        FE    984  UG/L      = 24.2    984.00
+## 6 U8-078 1999-08-23        MG  26400  UG/L      = 37.0  26400.00</code></pre>
 <hr>
 </div>
 </div>
+</div>
 <div id="basic-ggplot2-plotting" class="section level1">
-<h1>Basic ggplot2 Plotting</h1>
+<h1>Basic <code>ggplot2</code> Plotting</h1>
+<p>The basic ggplot syntax involves a call to the <code>ggplot()</code> function providing the data frame source, and the x and y columns inside the <code>aes()</code> function, then defining a geometry to plot. In our case, we will start with our DATE and RESULT_ND columns and a geometry of points to make time series plots.</p>
+<pre class="r"><code>library(ggplot2)
+g&lt;-ggplot(newdata,aes(DATE,RESULT_ND))+
+  geom_point()
+g</code></pre>
+<p><img src="lesson2_files/figure-html/plot1-1.png" width="672" /></p>
+<pre class="r"><code>g2&lt;-ggplot(newdata,aes(DATE,RESULT_ND,color=CHEM_CODE))+
+  geom_point()+
+  facet_wrap(~LOC_ID)
+g2</code></pre>
+<p><img src="lesson2_files/figure-html/plot2-1.png" width="672" /></p>
+<pre class="r"><code>g3&lt;-ggplot(newdata,aes(DATE,RESULT_ND,color=LOC_ID))+
+  geom_point()+
+  facet_wrap(~CHEM_CODE,scales=&#39;free&#39;)
+g3</code></pre>
+<p><img src="lesson2_files/figure-html/plot%203-1.png" width="672" /></p>
+<pre class="r"><code>g4&lt;-ggplot(newdata,aes(DATE,RESULT_ND))+
+  geom_point()+
+  facet_grid(LOC_ID~CHEM_CODE,scales=&#39;free&#39;)
+g4</code></pre>
+<p><img src="lesson2_files/figure-html/plot%204-1.png" width="672" /></p>
+<pre class="r"><code>g5&lt;-ggplot(newdata,aes(DATE,RESULT_ND,color=LOC_ID))+
+  geom_line(linetype=&#39;dashed&#39;)+
+  geom_smooth(method=&#39;lm&#39;)+
+  geom_point()+
+  facet_wrap(~paste0(CHEM_CODE,&#39; (&#39;,UNITS,&#39;)&#39;),scales=&#39;free&#39;)+
+  labs(title=&#39;Metals Time Series at 2 Wells&#39;,x=&#39;Date&#39;,y=&#39;Concentration (units)&#39;)+
+  theme(legend.position = &#39;bottom&#39;,legend.title = element_blank())
+g5</code></pre>
+<p><img src="lesson2_files/figure-html/plot%205-1.png" width="672" /></p>
+</div>
+<div id="save-out-plots-and-tables" class="section level1">
+<h1>Save Out Plots and Tables</h1>
+<pre class="r"><code>ggsave(&#39;./output/lesson2plots.png&#39;,g5,width = 7,height = 5,units = &#39;in&#39;)
+
+write.csv(summary,&#39;./output/lesson2summary.csv&#39;,row.names = FALSE)</code></pre>
 <hr>
 </div>
 <div id="exercises" class="section level1">
