@@ -100,6 +100,9 @@ img {
 button.code-folding-btn:focus {
   outline: none;
 }
+summary {
+  display: list-item;
+}
 </style>
 
 
@@ -114,7 +117,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -134,6 +136,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -155,18 +194,77 @@ $(document).ready(function () {
 });
 </script>
 
-
 <div class="container-fluid main-container">
 
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
 });
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
 </script>
 
 <!-- code folding -->
-
 
 
 
@@ -381,33 +479,19 @@ install.packages(&#39;ggplot2) #A VERY popular visualization and plotting packag
 <p></br></p>
 <div id="download-file" class="section level3">
 <h3>Download File</h3>
-<<<<<<< HEAD
-<p><code>download.file()</code></p>
-<p>Download the long format file <code>lesson2Data1.xlsx</code></p>
-<pre class="r"><code>download.file(&#39;https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/lesson2Data1.csv&#39;, destfile = &#39;./data/lesson2Data1.csv&#39;,mode = &#39;wb&#39;)</code></pre>
-<p>Download the wide format file <code>wideData.csv</code></p>
-<pre class="r"><code>download.file(&#39;https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/wideData.csv&#39;, destfile = &#39;./data/wideData.csv&#39;,mode = &#39;wb&#39;)</code></pre>
+<p><code>download.file(filepath)</code> Download the datafile from my github.</p>
+<pre class="r"><code>fp&lt;-&#39;https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv&#39;
+
+
+download.file(fp,destfile = &#39;./data/lesson2Data.csv&#39;,method=&#39;libcurl&#39;)</code></pre>
 </div>
-<div id="import-from-file" class="section level3">
-<h3>Import from file</h3>
+<div id="import-data-from-file" class="section level3">
+<h3>Import Data from File</h3>
 <p>Read these data files into local memory so we can do stuff with the data.</p>
 <div id="reading-from-csv" class="section level4">
 <h4>Reading from CSV</h4>
 <pre class="r"><code>#Read csv file
-longData&lt;-read.csv(&#39;./data/lesson2Data1.csv&#39;, stringsAsFactors = FALSE)</code></pre>
-<pre class="r"><code>#Read csv file
-wideData&lt;-read.csv(&#39;./data/wideData.csv&#39;, stringsAsFactors = FALSE,header = FALSE)</code></pre>
-</div>
-<div id="reading-from-excel-.xlsx" class="section level4">
-<h4>Reading from Excel .xlsx</h4>
-=======
-<p><code>download.file(filepath)</code> Download the datafile from my github.</p>
-<pre class="r"><code>download.file(&#39;https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv&#39;,destfile = &#39;./data/lesson2Data.csv&#39;,method=&#39;curl&#39;)</code></pre>
-</div>
-<div id="import-from-csv" class="section level3">
-<h3>Import from CSV</h3>
-<pre class="r"><code>data&lt;-read.csv(&#39;./data/lesson2Data.csv&#39;,stringsAsFactors = FALSE)</code></pre>
->>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
+data&lt;-read.csv(&#39;./data/lesson2Data.csv&#39;, stringsAsFactors = FALSE)</code></pre>
 <hr>
 </div>
 </div>
@@ -415,7 +499,6 @@ wideData&lt;-read.csv(&#39;./data/wideData.csv&#39;, stringsAsFactors = FALSE,he
 </div>
 <div id="inevitible-data-wrangling" class="section level1">
 <h1>Inevitible Data Wrangling</h1>
-<<<<<<< HEAD
 <p>Filtering, selecting and arranging the data is all part of setting up for your analysis. The <code>dplyr</code> package provides a powerful set of functions for data manipulation. Also see <code>data.table</code>. Here, we will focus on <code>dplyr</code>.</p>
 <div id="intoduction-to-dplyr" class="section level2">
 <h2>Intoduction to dplyr</h2>
@@ -424,28 +507,40 @@ wideData&lt;-read.csv(&#39;./data/wideData.csv&#39;, stringsAsFactors = FALSE,he
 <div id="long-format-data" class="section level3">
 <h3>Long Format Data</h3>
 <p>This format is most useful for computerized statistical analysis, database data storage, and for analytical plotting.</p>
-<pre class="r"><code>lf&lt;-longData %&gt;% select(LOC_ID, EASTING,NORTHING,SAMP_DATE,CHEM_CODE,RESULT,UNITS) %&gt;% .[1:10,]
+<pre class="r"><code>lf&lt;-data %&gt;% select(LOC_ID, SAMP_DATE,MATRIX_CODE,CHEM_CODE,RESULT,UNITS) %&gt;% .[1:10,]
 lf</code></pre>
-<pre><code>##    LOC_ID EASTING NORTHING SAMP_DATE CHEM_CODE RESULT UNITS
-## 1    CC-1 1654951 436022.6 31-Oct-10      ALKC    0.0  MG/L
-## 2    CC-1 1654951 436022.6 31-Oct-10      ALKB   15.9  MG/L
-## 3    CC-1 1654951 436022.6 31-Oct-10      ALKH    0.0  MG/L
-## 4   RC-16 1655221 436795.0 31-Oct-10       ALK   10.7  MG/L
-## 5   RC-16 1655221 436795.0 31-Oct-10      ALKC    0.0  MG/L
-## 6   RC-16 1655221 436795.0 31-Oct-10      ALKB   10.7  MG/L
-## 7   RC-16 1655221 436795.0 31-Oct-10      ALKH    0.0  MG/L
-## 8    CC-2 1655241 436735.0 31-Oct-10       ALK   12.9  MG/L
-## 9    CC-2 1655241 436735.0 31-Oct-10      ALKC    0.0  MG/L
-## 10   CC-2 1655241 436735.0 31-Oct-10      ALKB   12.9  MG/L</code></pre>
+<pre><code>##    LOC_ID SAMP_DATE MATRIX_CODE CHEM_CODE RESULT UNITS
+## 1  U8-048 19-AUG-99          WG        HG      0  UG/L
+## 2  U8-048 19-AUG-99          WG        SB      0  UG/L
+## 3  U8-048 19-AUG-99          WG        AS      0  UG/L
+## 4  U8-048 19-AUG-99          WG        BA    554  UG/L
+## 5  U8-048 19-AUG-99          WG        BE      0  UG/L
+## 6  U8-048 19-AUG-99          WG        CD      0  UG/L
+## 7  U8-048 19-AUG-99          WG        CA  67700  UG/L
+## 8  U8-048 19-AUG-99          WG        CR      0  UG/L
+## 9  U8-048 19-AUG-99          WG        FE    911  UG/L
+## 10 U8-048 19-AUG-99          WG        PB      0  UG/L</code></pre>
 </div>
 <div id="wide-format-data" class="section level3">
 <h3>Wide Format Data</h3>
-<p>This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator.</p>
-<ul>
-<li>Inconsistent spelling</li>
-<li>Wrong format</li>
-</ul>
-=======
+<p>This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator. We will look more at transitioning between long and wide formats in the next lesson.</p>
+<pre class="r"><code>wf&lt;-data %&gt;% select(LOC_ID,SAMP_DATE,CHEM_CODE,RESULT) %&gt;% 
+  filter(LOC_ID %in% c(&#39;U8-051&#39;,&#39;U8-052&#39;,&#39;U8-089&#39;,&#39;U8-046&#39;),
+         CHEM_CODE %in% c(&#39;AS&#39;,&#39;CD&#39;,&#39;FE&#39;,&#39;PB&#39;)) %&gt;% 
+  data.table::dcast(LOC_ID+SAMP_DATE~CHEM_CODE,fun.aggregate=max) %&gt;% 
+  .[1:10,]
+wf</code></pre>
+<pre><code>##    LOC_ID SAMP_DATE       AS   CD      FE   PB
+## 1  U8-046 08-SEP-95 60.10000    0  898.00    0
+## 2  U8-046 16-MAY-00     -Inf -Inf  866.00 -Inf
+## 3  U8-046 18-APR-97 69.70000 -Inf  896.00 -Inf
+## 4  U8-046 22-AUG-96  0.00000 -Inf  994.00 -Inf
+## 5  U8-051 01-DEC-06  0.00718    0    0.00    0
+## 6  U8-051 01-DEC-10     -Inf -Inf    1.09 -Inf
+## 7  U8-051 02-FEB-98     -Inf -Inf 1070.00 -Inf
+## 8  U8-051 02-NOV-09     -Inf -Inf    0.00 -Inf
+## 9  U8-051 03-APR-09     -Inf -Inf    0.00 -Inf
+## 10 U8-051 07-SEP-95  0.00000    0    0.00    0</code></pre>
 <p>The data we just downloaded are very clean, lucky us. But we will want to check the head, tail and dimensions briefly to see what we have here.</p>
 <pre class="r"><code>head(data)
 tail(data)
@@ -453,6 +548,8 @@ dim(data)
 names(data)
 str(data)</code></pre>
 <p>Looks good. Let’s follow an example of calculating summary statistics on our data and creating a plot using <code>ggplot2</code> package. But first, as is always the case, we will need to massage the dataset before we do analyses.</p>
+</div>
+</div>
 <div id="date-formatting" class="section level2">
 <h2>Date Formatting</h2>
 <p>A common issue in data work is formatting of dates and times. Check the format of our date column <code>SAMP_DATE</code> using <code>class()</code> and the <code>$</code> operator.</p>
@@ -471,7 +568,7 @@ class(data$DATE)</code></pre>
 <pre><code>## [1] &quot;POSIXct&quot; &quot;POSIXt&quot;</code></pre>
 <p>Now our data will sort by date properly. But we are going to want to do some other data manipulation to simplify the dataset and then analyze it.</p>
 </div>
-<div id="intoduction-to-dplyr" class="section level2">
+<div id="intoduction-to-dplyr-1" class="section level2">
 <h2>Intoduction to dplyr</h2>
 <p>There are many means of wrangling data in R, <code>dplyr</code> is a popular library for doing this, as is <code>data.table</code>, and of course base R. We will be using <code>dplyr</code> in this lesson.</p>
 <pre class="r"><code>library(dplyr)</code></pre>
@@ -506,16 +603,16 @@ summary&lt;-summarize(summary,
                    Stdev=sd(RESULT))
 summary</code></pre>
 <pre><code>## # A tibble: 6 x 9
-## # Groups:   CHEM_CODE [?]
-##   CHEM_CODE LOC_ID    MinDate    MaxDate     N     Min   Max    Average
-##       &lt;chr&gt;  &lt;chr&gt;     &lt;dttm&gt;     &lt;dttm&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-## 1        AS U8-056 1997-03-24 2005-10-13    16     0.0     3     0.1875
-## 2        AS U8-078 1999-03-25 2000-06-07     6    98.6   118   109.0333
-## 3        FE U8-056 1997-03-24 2005-10-13    17     0.0  3210   722.5412
-## 4        FE U8-078 1999-03-25 2000-06-07     7   897.0  1170  1009.8571
-## 5        MG U8-056 1997-03-24 2005-10-13    17 35600.0 49100 45247.0588
-## 6        MG U8-078 1999-03-25 2000-06-07     7 26400.0 28900 27900.0000
-## # ... with 1 more variables: Stdev &lt;dbl&gt;</code></pre>
+## # Groups:   CHEM_CODE [3]
+##   CHEM_CODE LOC_ID MinDate             MaxDate                 N    Min
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;dttm&gt;              &lt;dttm&gt;              &lt;int&gt;  &lt;dbl&gt;
+## 1 AS        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    16 0.    
+## 2 AS        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     6 9.86e1
+## 3 FE        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    17 0.    
+## 4 FE        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     7 8.97e2
+## 5 MG        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    17 3.56e4
+## 6 MG        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     7 2.64e4
+## # ... with 3 more variables: Max &lt;dbl&gt;, Average &lt;dbl&gt;, Stdev &lt;dbl&gt;</code></pre>
 <p></br></p>
 </div>
 <div id="the-pipe-operator" class="section level3">
@@ -534,16 +631,16 @@ summary</code></pre>
                    Stdev=sd(RESULT))
 summary</code></pre>
 <pre><code>## # A tibble: 6 x 9
-## # Groups:   CHEM_CODE [?]
-##   CHEM_CODE LOC_ID    MinDate    MaxDate     N     Min   Max    Average
-##       &lt;chr&gt;  &lt;chr&gt;     &lt;dttm&gt;     &lt;dttm&gt; &lt;int&gt;   &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;
-## 1        AS U8-056 1997-03-24 2005-10-13    16     0.0     3     0.1875
-## 2        AS U8-078 1999-03-25 2000-06-07     6    98.6   118   109.0333
-## 3        FE U8-056 1997-03-24 2005-10-13    17     0.0  3210   722.5412
-## 4        FE U8-078 1999-03-25 2000-06-07     7   897.0  1170  1009.8571
-## 5        MG U8-056 1997-03-24 2005-10-13    17 35600.0 49100 45247.0588
-## 6        MG U8-078 1999-03-25 2000-06-07     7 26400.0 28900 27900.0000
-## # ... with 1 more variables: Stdev &lt;dbl&gt;</code></pre>
+## # Groups:   CHEM_CODE [3]
+##   CHEM_CODE LOC_ID MinDate             MaxDate                 N    Min
+##   &lt;chr&gt;     &lt;chr&gt;  &lt;dttm&gt;              &lt;dttm&gt;              &lt;int&gt;  &lt;dbl&gt;
+## 1 AS        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    16 0.    
+## 2 AS        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     6 9.86e1
+## 3 FE        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    17 0.    
+## 4 FE        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     7 8.97e2
+## 5 MG        U8-056 1997-03-24 00:00:00 2005-10-13 00:00:00    17 3.56e4
+## 6 MG        U8-078 1999-03-25 00:00:00 2000-06-07 00:00:00     7 2.64e4
+## # ... with 3 more variables: Max &lt;dbl&gt;, Average &lt;dbl&gt;, Stdev &lt;dbl&gt;</code></pre>
 <p></br></p>
 </div>
 <div id="mutate" class="section level3">
@@ -563,7 +660,6 @@ head(newdata)</code></pre>
 ## 4 U8-078 1999-08-23        AS    105  UG/L      =  3.3    105.00
 ## 5 U8-078 1999-08-23        FE    984  UG/L      = 24.2    984.00
 ## 6 U8-078 1999-08-23        MG  26400  UG/L      = 37.0  26400.00</code></pre>
->>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
 <hr>
 </div>
 </div>
@@ -610,6 +706,7 @@ write.csv(summary,&#39;./output/lesson2summary.csv&#39;,row.names = FALSE)</code
 </div>
 <div id="exercises" class="section level1">
 <h1>Exercises</h1>
+<p>Check Back Soon!</p>
 </div>
 
 

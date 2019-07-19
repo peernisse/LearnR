@@ -19,6 +19,7 @@ library(tidyverse)
 ```{r libs, include = FALSE}
 library(tidyverse)
 library(xlsx)
+options(scipen = 6)
 
 ```
 
@@ -91,73 +92,35 @@ There are lots of ways to import data to local memory and start working with the
 `download.file(filepath)`
 Download the datafile from my github.
 
-```{r df} 
-download.file('https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv',destfile = './data/lesson2Data.csv',method='curl')
-
-```
-
-### Import from CSV
-
-```{r csv}
-
-<<<<<<< HEAD
-`download.file()`
-
-Download the long format file `lesson2Data1.xlsx`
-
-```{r long}
-download.file('https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/lesson2Data1.csv', destfile = './data/lesson2Data1.csv',mode = 'wb')
-```
+```{r df,eval=FALSE} 
+fp<-'https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv'
 
 
-Download the wide format file `wideData.csv`
+download.file(fp,destfile = './data/lesson2Data.csv',method='libcurl')
 
-```{r wide}
 
-download.file('https://stantec-my.sharepoint.com/:x:/r/personal/peter_eernisse_stantec_com/Documents/LearnR/Data/wideData.csv', destfile = './data/wideData.csv',mode = 'wb')
 
 
 ```
 
-### Import from file
+
+### Import Data from File
 Read these data files into local memory so we can do stuff with the data.
 
 #### Reading from CSV
 
 ```{r import1}
 #Read csv file
-longData<-read.csv('./data/lesson2Data1.csv', stringsAsFactors = FALSE)
+data<-read.csv('./data/lesson2Data.csv', stringsAsFactors = FALSE)
 
 
 ```
 
-
-```{r import2}
-#Read csv file
-wideData<-read.csv('./data/wideData.csv', stringsAsFactors = FALSE,header = FALSE)
-
-
-```
-
-
-#### Reading from Excel .xlsx
-```{r xlsx}
-
-
-
-
-```
-=======
-data<-read.csv('./data/lesson2Data.csv',stringsAsFactors = FALSE)
->>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
-
-
-```
 
 
 <hr>
 # Inevitible Data Wrangling
-<<<<<<< HEAD
+
 Filtering, selecting and arranging the data is all part of setting up for your analysis. The `dplyr` package provides a powerful set of functions for data manipulation. Also see `data.table`. Here, we will focus on `dplyr`.
 
 ## Intoduction to dplyr
@@ -170,7 +133,7 @@ This format is most useful for computerized statistical analysis, database data 
 
 ```{r lf}
 
-lf<-longData %>% select(LOC_ID, EASTING,NORTHING,SAMP_DATE,CHEM_CODE,RESULT,UNITS) %>% .[1:10,]
+lf<-data %>% select(LOC_ID, SAMP_DATE,MATRIX_CODE,CHEM_CODE,RESULT,UNITS) %>% .[1:10,]
 lf
 
 
@@ -178,8 +141,19 @@ lf
 ```
 
 ### Wide Format Data
-This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator.
-=======
+This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator. We will look more at transitioning between long and wide formats in the next lesson. 
+
+```{r wf}
+wf<-data %>% select(LOC_ID,SAMP_DATE,CHEM_CODE,RESULT) %>% 
+  filter(LOC_ID %in% c('U8-051','U8-052','U8-089','U8-046'),
+         CHEM_CODE %in% c('AS','CD','FE','PB')) %>% 
+  data.table::dcast(LOC_ID+SAMP_DATE~CHEM_CODE,fun.aggregate=max) %>% 
+  .[1:10,]
+wf
+
+```
+
+
 The data we just downloaded are very clean, lucky us. But we will want to check the head, tail and dimensions briefly to see what we have here.
 
 ```{r checkdata,echo=TRUE,results='hide'}
@@ -310,7 +284,7 @@ head(newdata)
 
 ```
 
->>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
+
 
 
 
@@ -386,3 +360,5 @@ write.csv(summary,'./output/lesson2summary.csv',row.names = FALSE)
 
 <hr>
 # Exercises
+
+Check Back Soon!
