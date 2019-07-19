@@ -13,6 +13,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE,error = FALSE,message = FALSE, warning = FALSE)
+library(tidyverse)
 ```
 
 ```{r libs, include = FALSE}
@@ -24,13 +25,20 @@ library(xlsx)
 
 <hr>
 # R Packages
-A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package 'xlsx' which contains functions for use in working with Excel files from R.
+A package is group of code files and associated files that are compiled to provide a library of R functions which serve a common purpose. An example is package 'xlsx' which contains functions for use in working with Excel files from R. Try installing these Excel interfacing packages, though some are dependent upon your current installation of JAVA.
+
+
 
 ```
 install.packages('xlsx')
+install.packages('readxl')
+install.packages('openxlsx')
+install.packages('XLConnect')
     
 ```
-The package installs from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.
+If you are getting an error installing some of these packages, request updated versions of 32- and 64-bit JAVA to be installed on your machine. Package `readxl` should not be problematic, however, as it does not have JAVA dependencies.
+
+Most R packages install from the CRAN network, a worldwide repository for publicly shared R packages. There are thousands of packages contributed to the CRAN repository for almost any application, scientific or otherwise, you can think of. Packages can also be installed from any other repository such as GitHub or just from a .zip file, if the package you are interested in is not on CRAN.
 
 ## Install Packages for this Class
 Packages just need to be installed once on your machine, however, many packages are frequently updated.
@@ -46,31 +54,53 @@ install.packages('ggplot2) #A VERY popular visualization and plotting package.
 
 ```
 ## Loading Packages to Local Memory
+THough packages need only be installed once on your machine, they need to be called into local memory before use in every R session.
 
 `library(dplyr)`
 `library(ggplot2)`
 `library(data.table)`
 
+</br>
 
+### See what is loaded in the current session:
+`sessionInfo()`
 
-### See where you packages are:
+</br>
+
+### See where your packages are:
 `.libPaths()`
 
-
+<hr>
 # Getting Data into R
+There are lots of ways to import data to local memory and start working with the data, as there are ways to export your created objects.
 
 ## Common Data Sources
 
-* CSV file
+* **CSV file**
 * Tab delimited file
 * Excel file
-* Download a file from the internet
+* **Download a file from the internet**
 * Read a file from the internet
+* SQL query from a database
 * Web APIs
 * Scrape webpages
 
-### Download File
+</br>
 
+### Download File
+`download.file(filepath)`
+Download the datafile from my github.
+
+```{r df} 
+download.file('https://raw.githubusercontent.com/peernisse/LearnR/master/lesson2Data.csv',destfile = './data/lesson2Data.csv',method='curl')
+
+```
+
+### Import from CSV
+
+```{r csv}
+
+<<<<<<< HEAD
 `download.file()`
 
 Download the long format file `lesson2Data1.xlsx`
@@ -117,12 +147,17 @@ wideData<-read.csv('./data/wideData.csv', stringsAsFactors = FALSE,header = FALS
 
 
 ```
+=======
+data<-read.csv('./data/lesson2Data.csv',stringsAsFactors = FALSE)
+>>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
 
 
+```
 
 
 <hr>
 # Inevitible Data Wrangling
+<<<<<<< HEAD
 Filtering, selecting and arranging the data is all part of setting up for your analysis. The `dplyr` package provides a powerful set of functions for data manipulation. Also see `data.table`. Here, we will focus on `dplyr`.
 
 ## Intoduction to dplyr
@@ -144,13 +179,210 @@ lf
 
 ### Wide Format Data
 This data format is most useful for printing out on paper and then looking at it with your eyes. If you want to address analytical questions with a dataset like this, you will need paper, pencils, highlighters, maybe colored tape, and a calculator.
+=======
+The data we just downloaded are very clean, lucky us. But we will want to check the head, tail and dimensions briefly to see what we have here.
+
+```{r checkdata,echo=TRUE,results='hide'}
+head(data)
+tail(data)
+dim(data)
+names(data)
+str(data)
+```
+
+Looks good. Let's follow an example of calculating summary statistics on our data and creating a plot using `ggplot2` package. But first, as is always the case, we will need to massage the dataset before we do analyses.
+
+## Date Formatting
+A common issue in data work is formatting of dates and times. Check the format of our date column `SAMP_DATE` using `class()` and the `$` operator.
+
+```{r class}
+class(data$SAMP_DATE)
+```
+
+Our date column is a character class, meaning things would not sort by date and no hope of time series graphs, etc. THis happens commonly when reading data from a text file.
+
+The following code will be of great help in fixing this. We will create a new column in the data frame and it will hold correctly formatted dates.
+
+**Method 1**
+```{r asDate}
+data$DATE<-as.Date(data$SAMP_DATE,format='%d-%b-%y')
+class(data$DATE)
+```
+
+**Method 2**
+```{r strptime}
+newdates<-strptime(data$SAMP_DATE,format='%d-%b-%y')
+data$DATE<-as.POSIXct(newdates)
+class(data$DATE)
+
+```
+
+Now our data will sort by date properly. But we are going to want to do some other data manipulation to simplify the dataset and then analyze it.
 
 
-* Inconsistent spelling
-* Wrong format
+## Intoduction to dplyr
+There are many means of wrangling data in R, `dplyr` is a popular library for doing this, as is `data.table`, and of course base R. We will be using `dplyr` in this lesson.
+
+```{r dplyr,results='hide'}
+library(dplyr)
+```
+
+</br>
+
+### Select and Filter
+Let's see what chemicals we have in the dataset, using `unique()`.
+```{r chems,results='hide'}
+unique(data$CHEM_CODE)
+unique(data$LOC_ID)
+
+```
+
+
+Now, let's grab just the columns we need, and then use filtering to zero in on just a few locations and chemicals. We will use `dplyr` functions `select` and `filter`.
+
+```{r selectfilter}
+#Create new dataframe to leave the original intact
+newdata<-select(data,LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL)
+dim(newdata)
+
+newdata<-filter(newdata,LOC_ID %in% c('U8-056','U8-078'),CHEM_CODE %in% c('FE','AS','MG'))
+dim(newdata)
+
+```
+
+</br>
+
+### Summarize
+We can use the `dplyr` functions `group_by` and `summarize` to create a summary table.
+
+```{r summarize}
+#Create dtaframe containing a summary
+summary<-group_by(newdata,CHEM_CODE,LOC_ID)
+summary<-summarize(summary,
+                   MinDate=min(DATE),
+                   MaxDate=max(DATE),
+                   N=length(RESULT),
+                   Min=min(RESULT),
+                   Max=max(RESULT),
+                   Average=mean(RESULT),
+                   Stdev=sd(RESULT))
+summary
+
+```
+
+</br>
+
+### The Pipe Operator ( %>% )
+In `dplyr` there is a very useful operator called the pipe, which removes the need to state your object as the first argument of a `dplyr` function, and chains the whole process together. It is an annoying character to type, so use the key shortcut for it which is `ctrl+shift+M`.
+
+```{r pipe}
+
+summary<-data %>% 
+  select(LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL) %>% 
+  filter(LOC_ID %in% c('U8-056','U8-078'),CHEM_CODE %in% c('FE','AS','MG')) %>% 
+  group_by(CHEM_CODE,LOC_ID) %>% 
+  summarize(MinDate=min(DATE),
+                   MaxDate=max(DATE),
+                   N=length(RESULT),
+                   Min=min(RESULT),
+                   Max=max(RESULT),
+                   Average=mean(RESULT),
+                   Stdev=sd(RESULT))
+summary
+
+```
+
+</br>
+
+### Mutate
+The `dplyr` function `mutate` is used to create or modify columns.
+
+In our data example, I would like the non-detected values currently recorded as zero to be replaced with one-half the method detection limit (MDL). We will create a new column `RESULT_ND` to hold this information, using the function `ifelse` to do the logic.
+
+```{r mutate}
+
+newdata<-data %>%
+  select(LOC_ID,DATE,CHEM_CODE,RESULT,UNITS,PAR_VQ,MDL) %>% 
+  filter(LOC_ID %in% c('U8-056','U8-078'),CHEM_CODE %in% c('FE','AS','MG')) %>% 
+  mutate(RESULT_ND = ifelse(PAR_VQ=='ND',0.5*MDL,RESULT))#ifelse reads 3 arguments the same as the IF function in Excel
+  
+head(newdata)
+
+```
+
+>>>>>>> 5b3b87343df40383250af3bf3c1baf609b513b0c
+
+
 
 <hr>
-# Basic ggplot2 Plotting
+# Basic `ggplot2` Plotting
+
+The basic ggplot syntax involves a call to the `ggplot()` function providing the data frame source, and the x and y columns inside the `aes()` function, then defining a geometry to plot. In our case, we will start with our DATE and RESULT_ND columns and a geometry of points to make time series plots.
+
+```{r plot1}
+library(ggplot2)
+g<-ggplot(newdata,aes(DATE,RESULT_ND))+
+  geom_point()
+g
+```
+
+
+
+```{r plot2}
+g2<-ggplot(newdata,aes(DATE,RESULT_ND,color=CHEM_CODE))+
+  geom_point()+
+  facet_wrap(~LOC_ID)
+g2
+```
+
+
+
+
+```{r plot 3}
+g3<-ggplot(newdata,aes(DATE,RESULT_ND,color=LOC_ID))+
+  geom_point()+
+  facet_wrap(~CHEM_CODE,scales='free')
+g3
+
+```
+
+
+
+
+```{r plot 4}
+g4<-ggplot(newdata,aes(DATE,RESULT_ND))+
+  geom_point()+
+  facet_grid(LOC_ID~CHEM_CODE,scales='free')
+g4
+
+
+```
+
+
+```{r plot 5}
+g5<-ggplot(newdata,aes(DATE,RESULT_ND,color=LOC_ID))+
+  geom_line(linetype='dashed')+
+  geom_smooth(method='lm')+
+  geom_point()+
+  facet_wrap(~paste0(CHEM_CODE,' (',UNITS,')'),scales='free')+
+  labs(title='Metals Time Series at 2 Wells',x='Date',y='Concentration (units)')+
+  theme(legend.position = 'bottom',legend.title = element_blank())
+g5
+
+```
+
+
+# Save Out Plots and Tables
+
+```{r output}
+ggsave('./output/lesson2plots.png',g5,width = 7,height = 5,units = 'in')
+
+write.csv(summary,'./output/lesson2summary.csv',row.names = FALSE)
+
+```
+
+
+
 
 <hr>
 # Exercises
